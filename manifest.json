@@ -1,0 +1,34 @@
+{
+  "split" : [
+    {
+      "name": "react",
+      "reg": "[\\/]node_modules[\\/]react\\/",
+      "fileName": "react.js"
+    },
+    {
+      "name": "react-dom",
+      "reg": "[\\/]node_modules[\\/](react-dom)[\\/]?",
+      "fileName": "react-dom.js"
+    },
+    {
+      "name": "react-redux",
+      "reg": "[\\/]node_modules[\\/](react-redux)[\\/]?",
+      "fileName": "react-redux.js"
+    },
+    {
+      "name": "redux",
+      "reg": "[\\/]node_modules[\\/](redux)[\\/]?",
+      "fileName": "redux.js"
+    },
+    {
+      "name": "react-virtualized",
+      "reg": "[\\/]node_modules[\\/](react-virtualized)[\\/]?",
+      "fileName": "react-virtualized.js"
+    },
+    {
+      "name": "vendors",
+      "reg": "[\\/]node_modules[\\/]^(.?)[\\/]?",
+      "fileName": "vendors.js"
+    }
+  ]
+}

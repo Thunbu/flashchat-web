@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "jsx": "react",
+    "allowJs": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "strict": true
+  },
+  "include": [
+    "./src/**/*",
+    "./src/*"
+  ],
+  "exclude": [
+    "./node_modules/"
+  ]
+}
