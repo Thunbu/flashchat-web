@@ -15,6 +15,7 @@ export type MessageAllUseStoreInterface = MessageAllUseStoreActionInterface & Me
 
 export interface MessageAllPropsInterface extends MessageAllUseStoreInterface {
     list: MessageItemInterface[],
+    chatId: string
 }
 export interface MessageAllStateInterface {
 

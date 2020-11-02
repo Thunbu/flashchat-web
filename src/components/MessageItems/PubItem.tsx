@@ -52,6 +52,7 @@ export const RenderMsgItemComponent = (MessageItem: MessageItemInterface, props:
  * @param {ListRowProps} props - 虚拟滚动的props
  * @param {UserInterface} CurrentUser - 当前用户信息
  * @param {UserInterface} SenderUser - 发送者信息
+ * @param {any} measure
  * @return {React.ReactNode}
  */
 

@@ -9,6 +9,7 @@ import {SendMsgMetaType} from "../../Store/Action/message.a";
 import {UserInterface} from "../../Store/Types/users.t";
 import {ChatItemInterface} from "../../Store/Types/chatList.t";
 import {formatChatViewTime} from "../index";
+import {StoreStatesTypes} from "../../Store/store.i";
 
 export const SendMsgDataJoinToRealData = (
     Data: IMSendMessageTypes,
@@ -46,9 +47,14 @@ export const SendMsgMetaDataJoinToRealData = (params: SendMsgMetaType): IMSendMe
     };
 }
 export const IMGetMessageJoinToLocal = (params: IMGetMessageInterface): MessageItemInterface => {
+    let chatId = params.receiver;
+    const StoreState = <StoreStatesTypes>window.$store.getState();
+    if (params.chatType === 0 && chatId === StoreState.System.CurrentUser.IMID) {
+        chatId = params.sender;
+    }
     return {
         id: params.id,
-        chatId: params.sender,
+        chatId: chatId,
         time: params.time,
         chatType: params.chatType,
         receiverId: params.receiver,

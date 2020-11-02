@@ -5,7 +5,7 @@ import {
     __IMLoginAppVersion,
     __IMLoginTerminal
 } from "../../config";
-import {IMGetChatSessionInfoParams, IMGetMessageInterface} from "./im.i";
+import {IMGetChatSessionInfoParams, IMGetMessageInterface, SIMLoginParams} from "./im.i";
 import {IMChatSessionInfoJoinToLocal, IMGetMessageJoinToLocal, IMUserMessageJoinToLocal} from "./im.u";
 import {UPDATE_USER_MESSAGE, UserInterface} from "../../Store/Types/users.t";
 import {DefaultUser} from "../../Store/Data/users.data";
@@ -13,15 +13,6 @@ import {IM_GetChatSessionInfo, IM_GetMultiPersonalData} from "./im.f";
 import {ADD_MESSAGE_TO_CHAT, ADD_MESSAGE_TO_MAP} from "../../Store/Types/message.t";
 import {UPDATE_CHAT_ITEM} from "../../Store/Types/chatList.t";
 
-export interface SIMLoginParams {
-    appId: string,
-    terminal: string,
-    userId: string,
-    account: string,
-    userSig: string,
-    appversion: string,
-    isForce: boolean
-}
 
 export const InitSIM = <T = any>(): Promise<T> => {
     return new Promise((resolve, reject) => {
@@ -90,11 +81,13 @@ export const CheckChatStatus = (chatId: string, chatType: IMGetChatSessionInfoPa
 
 export const OnGetNewMessage = (msg: IMGetMessageInterface): void => {
     const store = window.$store;
+    console.log(msg);
     const Msg = IMGetMessageJoinToLocal(msg);
     GetUserInfo(Msg.sender);
     CheckChatStatus(Msg.chatId, Msg.chatType);
     store.dispatch({ type: ADD_MESSAGE_TO_MAP, data: Msg });
     store.dispatch({ type: ADD_MESSAGE_TO_CHAT, data: {chatId: Msg.chatId, messageId: Msg.id}});
+    return void(0);
 };
 export const ListenSIMEvents = () => {
     window.SIM.addEventListener('msg', (msg: IMGetMessageInterface) => {
