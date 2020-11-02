@@ -69,7 +69,7 @@ export const GetUserInfo = (userId: string): UserInterface => {
     if (userMsg) {
         return userMsg;
     } else {
-        FetchUserMessage([userMsg.id]);
+        FetchUserMessage([userId]);
         return DefaultUser;
     }
 }
