@@ -2,7 +2,8 @@ import * as React from "react";
 import Image from "../Image";
 import './index.less';
 import {ChatItemInterface} from "../../modules/ChatRoot/Store/Types/chatList.t";
-import {MessageItemInterface} from "../../modules/ChatRoot/Methods/IM/im.i";
+import {MessageLocalInteraction} from "../../modules/ChatRoot/Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 export interface ChatListItemPropsType {
     onClick: (event: React.MouseEvent, activeChat: ChatItemInterface) => void;

@@ -2,7 +2,8 @@ import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
 import {ChatItemInterface} from "../../Store/Types/chatList.t";
 import {UserInterface} from "../../Store/Types/users.t";
 import {CurrentUserInterface} from "../../Store/Types/system.t";
-import {MessageItemInterface} from "../../Methods/IM/im.i";
+import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 export interface MessageListUseStoreStatesInterface {
     GetChatMessagesByChatId: (id: string) => string[],

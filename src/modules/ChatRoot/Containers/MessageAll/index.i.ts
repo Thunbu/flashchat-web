@@ -2,7 +2,8 @@ import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
 import {UserInterface} from "../../Store/Types/users.t";
 import {DefaultUser} from "../../Store/Data/users.data";
 import {CurrentUserInterface} from "../../Store/Types/system.t";
-import {MessageItemInterface} from "../../Methods/IM/im.i";
+import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 export interface MessageAllUseStoreStateInterface {
     CurrentUser: CurrentUserInterface,

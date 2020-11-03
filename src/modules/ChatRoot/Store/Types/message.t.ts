@@ -1,4 +1,5 @@
-import {MessageItemInterface} from "../../Methods/IM/im.i";
+import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 export interface MessageStoreTypes {
     MessageMap: {

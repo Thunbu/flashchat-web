@@ -1,8 +1,9 @@
 import {StoreDispatchHandle} from "../store.i";
 import {ChatItemInterface, ChatListStoreTypes, SET_CHAT_LIST, UPDATE_ACTIVE_CHAT} from "../Types/chatList.t";
-import {IMGetChatSessionItem} from "../../Methods/IM/im.i";
-import {IMChatSessionInfoJoinToLocal, IMGetMessageJoinToLocal} from "../../Methods/IM/im.u";
 import {ADD_MESSAGE_TO_CHAT, ADD_MESSAGE_TO_MAP} from "../Types/message.t";
+import {IMGetChatSessionItem} from "../../Methods/IM/types/_chat";
+import {IMChatSessionInfoJoinToLocal} from "../../Methods/IM/transform/_chat";
+import {IMGetMessageJoinToLocal} from "../../Methods/IM/transform/_message";
 
 export const ChangeActiveChat = (dispatch: StoreDispatchHandle, activeChat: ChatItemInterface): void => {
     dispatch({ type: UPDATE_ACTIVE_CHAT, data: activeChat.id });

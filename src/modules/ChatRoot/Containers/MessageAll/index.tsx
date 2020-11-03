@@ -8,15 +8,17 @@ import {
     MessageAllUseStoreState
 } from "./index.i";
 import {AutoSizer, CellMeasurer, CellMeasurerCache, List, ListRowProps} from "react-virtualized";
+import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllStateInterface>{
     VirtualScroller: List|null = null;
     readonly DefaultCellMeasurerCache = new CellMeasurerCache({
         defaultHeight: 58,
         fixedWidth: true,
+        keyMapper: rowIndex => this.GetIndexRow(rowIndex).id
     });
     readonly state = {};
-    rowIndex: number = -1;
 
     componentDidMount() {
         this.ForceUpdate().then(() => {
@@ -36,7 +38,9 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
             return false;
         }
     }
-
+    protected GetIndexRow = (index: number): MessageItemInterface => {
+        return this.props.list[index];
+    }
     protected RenderMsgItemRows = (props: ListRowProps): React.ReactNode => {
         const Message = this.props.list[props.index];
         const { CurrentUser, GetUserInfo } = this.props;
@@ -57,13 +61,13 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
     }
     protected ComputeLastMessageHeight = () => {
         if (this.VirtualScroller) {
-            // this.DefaultCellMeasurerCache.clear(this.props.list.length, 0);
-            this.VirtualScroller.recomputeRowHeights(this.props.list.length);
+            this.VirtualScroller.recomputeRowHeights(0);
+            this.VirtualScroller.recomputeRowHeights(this.props.list.length - 1);
         }
     };
     protected ScrollToLastMessage = () => {
         if (this.props.list.length && this.VirtualScroller) {
-            this.VirtualScroller!.scrollToRow(this.props.list.length);
+            this.VirtualScroller!.scrollToRow(this.props.list.length - 1);
         }
     };
     protected ForceUpdate = () => {
@@ -82,17 +86,19 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
         return (
             <div id={'message_outer_container'}>
                 <AutoSizer>
-                    {({width, height}) => (
-                        <List
-                            ref={(ref: any) => this.VirtualScroller = ref}
-                            width={width}
-                            height={height}
-                            rowCount={list.length}
-                            rowHeight={this.DefaultCellMeasurerCache.rowHeight}
-                            deferredMeasurementCache={this.DefaultCellMeasurerCache}
-                            style={{ outline: 'none' }}
-                            rowRenderer={this.RenderMsgItemRows} />
-                    )}
+                    {
+                        ({width, height}) => (
+                            <List
+                                ref={(ref: any) => this.VirtualScroller = ref}
+                                width={width}
+                                height={height}
+                                rowCount={list.length}
+                                rowHeight={this.DefaultCellMeasurerCache.rowHeight}
+                                deferredMeasurementCache={this.DefaultCellMeasurerCache}
+                                style={{ outline: 'none' }}
+                                rowRenderer={this.RenderMsgItemRows} />
+                        )
+                    }
                 </AutoSizer>
             </div>
         )

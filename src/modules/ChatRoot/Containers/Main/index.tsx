@@ -4,7 +4,8 @@ import ChatOuter from "../ChatOuter";
 import {connect} from "react-redux";
 import {MainProps, MainState, MainStoreAction, MainStoreProps} from "./index.s";
 import {InitSIM, ListenSIMEvents, LoginSIM} from "../../Methods/IM/im";
-import {IM_GetChatSessionList, IM_GetMultiPersonalData} from "../../Methods/IM/im.f";
+import {IM_GetMultiPersonalData} from "../../Methods/IM/function/_user";
+import {IM_GetChatSessionList} from "../../Methods/IM/function/_chat";
 
 class Main extends React.Component<MainProps, MainState> {
     readonly state = {};

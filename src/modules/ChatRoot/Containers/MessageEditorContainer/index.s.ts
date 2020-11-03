@@ -1,5 +1,6 @@
 import {ChatItemInterface} from "../../Store/Types/chatList.t";
-import {MessageTypeEnum} from "../../Methods/IM/im.i";
+import {PublicMessageInteraction} from "../../Methods/IM/types/_message";
+import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
 
 export interface MessageEditorContainerPropsInterface {
     chat: ChatItemInterface,

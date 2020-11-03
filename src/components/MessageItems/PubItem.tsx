@@ -10,7 +10,9 @@ import Image from "../Image";
 import {UserInterface} from "../../modules/ChatRoot/Store/Types/users.t";
 import './PubItem.less';
 import {CurrentUserInterface} from "../../modules/ChatRoot/Store/Types/system.t";
-import {MessageItemInterface, MessageTypeEnum} from "../../modules/ChatRoot/Methods/IM/im.i";
+import {MessageLocalInteraction, PublicMessageInteraction} from "../../modules/ChatRoot/Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
+import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
 
 export interface MessageItemProps {
     key: string,

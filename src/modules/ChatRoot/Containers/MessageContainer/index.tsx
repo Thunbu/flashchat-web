@@ -8,7 +8,8 @@ import {
 import MessageEditorContainer from "../MessageEditorContainer";
 import MessageListContainer from "../MessageListContainer";
 import {connect} from "react-redux";
-import {MessageTypeEnum} from "../../Methods/IM/im.i";
+import {PublicMessageInteraction} from "../../Methods/IM/types/_message";
+import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
 
 class MessageContainer extends React.Component<MessageContainerPropsInterface, any>{
     protected onSubmit = (val: string, type: MessageTypeEnum) => {

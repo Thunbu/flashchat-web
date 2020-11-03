@@ -2,7 +2,8 @@ import * as React from "react";
 import {MessageEditorContainerPropsInterface, MessageEditorContainerStateInterface} from "./index.s";
 import EditorToolBar from "../../../../components/EditorToolBar";
 import EditorComponent from "../../../../components/EditorComponent";
-import {MessageTypeEnum} from "../../Methods/IM/im.i";
+import {PublicMessageInteraction} from "../../Methods/IM/types/_message";
+import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
 
 export default class MessageEditorContainer extends
     React.Component<

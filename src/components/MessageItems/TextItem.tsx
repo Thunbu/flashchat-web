@@ -1,5 +1,6 @@
 import * as React from "react";
-import {MessageItemInterface} from "../../modules/ChatRoot/Methods/IM/im.i";
+import {MessageLocalInteraction} from "../../modules/ChatRoot/Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 export interface TextItemPropsInterface {
     itemKey: string,

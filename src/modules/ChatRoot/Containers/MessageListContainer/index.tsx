@@ -6,7 +6,8 @@ import {
     MessageListContainerUseStoreActions,
     MessageListContainerUseStoreStates
 } from "./index.s";
-import {MessageItemInterface} from "../../Methods/IM/im.i";
+import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 
 class MessageListContainer extends React.Component<MessageListContainerPropsInterface, MessageListContainerStateInterface>{

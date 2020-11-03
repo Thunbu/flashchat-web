@@ -3,7 +3,6 @@ export interface ChatItemInterface {
     avatar: string,
     name: string,
     time: string,
-    news: string,
     id: string,
 }
 
