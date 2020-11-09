@@ -8,14 +8,17 @@ import {
 import MessageEditorContainer from "../MessageEditorContainer";
 import MessageListContainer from "../MessageListContainer";
 import {connect} from "react-redux";
-import {MessageTypeEnum} from "../../Methods/IM/im.i";
+import {PublicMessageInteraction} from "../../Methods/IM/types/_message";
+import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
 
 class MessageContainer extends React.Component<MessageContainerPropsInterface, any>{
     protected onSubmit = (val: string, type: MessageTypeEnum) => {
         const { ChatItem, CurrentUser } = this.props;
         this.props.SendMessage({
             type,
-            content: val,
+            content: {
+                text: val
+            },
             chatType: 0,
             receiver: ChatItem.id,
             sender: CurrentUser.IMID,

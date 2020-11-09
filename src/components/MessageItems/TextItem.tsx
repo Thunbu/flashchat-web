@@ -1,16 +1,18 @@
 import * as React from "react";
-import {MessageItemInterface} from "../../modules/ChatRoot/Methods/IM/im.i";
+import {MessageLocalInteraction, PublicMessageInteraction} from "../../modules/ChatRoot/Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
+import MessageForContentChart = PublicMessageInteraction.MessageForContentChart;
 
 export interface TextItemPropsInterface {
-    itemKey: string,
-    Message: MessageItemInterface
+    Message: MessageItemInterface<MessageForContentChart['0']>
 }
 
 export default class TextItem extends React.Component<TextItemPropsInterface, any>{
     render() {
+        const { Message } = this.props;
         return (
-            <div key={this.props.itemKey} className={'__text_item'}>
-                <p>{this.props.Message.message.text}</p>
+            <div className={'__text_item'}>
+                <p>{Message.message.text}</p>
             </div>
         )
     }

@@ -9,18 +9,21 @@ const setting = {
 	hot: false,
 	port: 8091,
 	open: true,
-	host : '0.0.0.0',
+	host : 'localhost',
 	overlay: {
 		warnings: true,
 		errors: true
 	},
 	proxy: {
 		'/SDKController': {
-			target: 'http://webuat.sammbo.com:8777/',
+			// target: 'http://webuat.sammbo.com:8777/',
+			target: 'http://10.86.59.79:8777/',
 			pathRewrite: {'^/SDKController': ''}
 		},
 		'/ServerController': {
-			target: 'https://coop-fat.sammbo.com/',
+			target: 'http://10.86.59.79:8367/demo/',
+			pathRewrite: {'^/ServerController': ''}
+			// target: 'https://coop-fat.sammbo.com/',
 		},
 	}
 };

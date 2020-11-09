@@ -8,7 +8,7 @@ export interface MessageContainerUseStoreStateProps {
     CurrentUser: CurrentUserInterface
 }
 export interface MessageContainerUseStoreActionProps {
-    SendMessage(params: SendMsgMetaType): void
+    SendMessage<T>(params: SendMsgMetaType): void
 }
 export type MessageContainerUseStoreProps = MessageContainerUseStoreActionProps & MessageContainerUseStoreStateProps;
 

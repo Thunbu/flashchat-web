@@ -1,8 +1,8 @@
 import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
 import {UpdateCurrentUserInfo} from "../../Store/Action/system.a";
 import {UpdateCurrentUserParams} from "../../Store/Types/system.t";
-import {IMGetChatSessionItem} from "../../Methods/IM/im.i";
 import {SetChatListByResponse} from "../../Store/Action/chatList.a";
+import {IMGetChatSessionItem} from "../../Methods/IM/types/_chat";
 
 export interface MainUseStoreStateTypes {
     UserIMID: string,

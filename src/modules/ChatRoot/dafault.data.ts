@@ -1,4 +1,6 @@
 import {MessageStoreTypes} from "./Store/Types/message.t";
+import {PublicMessageInteraction} from "./Methods/IM/types/_message";
+import MessageForContentChart = PublicMessageInteraction.MessageForContentChart;
 
 export const DefaultAvatarList: string[] = [
     'https://bossfs.sammbo.com/0/1/head/honeybee.png?x-oss-process=image/resize,m_mfit,h_250,w_250',
@@ -56,4 +58,44 @@ export const DefaultUserList = {
         time: '10:19',
         id: 'A_8589934618'
     },
+}
+export const DefaultMessageItemEnum: { image: MessageForContentChart['1'], video: MessageForContentChart['3'] } = {
+    image: {
+        format: 0, // 0 png  1 jpg
+        imageList: [
+            {
+                url: 'https://bossfs.sammbo.com/0/1/head/yellowcat.png',
+                type: 0,
+                size: 1024,
+                height: 600,
+                width: 600
+            },
+            {
+                url: 'https://bossfs.sammbo.com/0/1/head/yellowcat.png?x-oss-process=image/resize,l_720',
+                type: 1,
+                size: 512,
+                height: 400,
+                width: 400
+            },
+            {
+                url: 'https://bossfs.sammbo.com/0/1/head/yellowcat.png?x-oss-process=image/resize,l_198',
+                type: 2,
+                size: 256,
+                height: 300,
+                width: 300
+            }
+        ],
+        isHD: true, // 是否高清
+    },
+    video: {
+        coverFormat: 0,
+        coverHeight: 200,
+        coverSize: 135455,
+        coverUrl: "https://bossfs.sammbo.com/2/1/260392/2020/11/1604556149509.jpg",
+        coverWidth: 300,
+        duration: 5000,
+        videoFormat: 5,
+        videoSize: 2492145,
+        videoUrl: "https://bossfs.sammbo.com/2/1/260392/2020/11/1604556149616.MOV",
+    }
 }

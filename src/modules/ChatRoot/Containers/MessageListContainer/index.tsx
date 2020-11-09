@@ -6,7 +6,8 @@ import {
     MessageListContainerUseStoreActions,
     MessageListContainerUseStoreStates
 } from "./index.s";
-import {MessageItemInterface} from "../../Methods/IM/im.i";
+import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 
 class MessageListContainer extends React.Component<MessageListContainerPropsInterface, MessageListContainerStateInterface>{
@@ -18,7 +19,7 @@ class MessageListContainer extends React.Component<MessageListContainerPropsInte
     render() {
         return (
             <div id={'message_list_container'}>
-                <MessageAll list={this.getMessageList()} />
+                <MessageAll list={this.getMessageList()} chatId={this.props.chat.id} />
             </div>
         )
     }

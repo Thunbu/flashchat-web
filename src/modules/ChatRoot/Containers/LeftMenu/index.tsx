@@ -1,9 +1,9 @@
 import * as React from "react";
-import Image from '../../../../components/Image';
 import LeftMenuTabItem from "../../../../components/LeftMenuTabItem";
 import {connect} from "react-redux";
 import {LeftMenuProps, LeftMenuStoreAction, LeftMenuStoreState} from "./index.s";
 import {TabContainers} from "../../Store/Types/system.t";
+import Avatar from "../../../../components/Avatar";
 
 class LeftMenu extends React.Component<LeftMenuProps, any> {
     protected onLeftMenuClick = (menuId: TabContainers) => {
@@ -14,7 +14,7 @@ class LeftMenu extends React.Component<LeftMenuProps, any> {
         return (
             <div id={'left_menu'}>
                 <div className={'user_avatar'}>
-                    <Image src={CurrentUserAvatar}
+                    <Avatar src={CurrentUserAvatar}
                            width={32} height={32} round={true} />
                 </div>
                 <div className={'tab_switch'}>

@@ -1,7 +1,8 @@
 import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
 import {ChangeActiveChat} from "../../Store/Action/chatList.a";
 import {ChatItemInterface} from "../../Store/Types/chatList.t";
-import {MessageItemInterface} from "../../Methods/IM/im.i";
+import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
+import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 
 
 export interface ChatListUseStoreStatesTypes {
