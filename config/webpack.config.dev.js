@@ -16,14 +16,14 @@ const setting = {
 	},
 	proxy: {
 		'/SDKController': {
-			// target: 'http://webuat.sammbo.com:8777/',
-			target: 'http://10.86.59.79:8777/',
+			target: 'http://webuat.sammbo.com:8777/',
+			// target: 'http://10.86.59.79:8777/',
 			pathRewrite: {'^/SDKController': ''}
 		},
 		'/ServerController': {
-			target: 'http://10.86.59.79:8367/demo/',
-			pathRewrite: {'^/ServerController': ''}
-			// target: 'https://coop-fat.sammbo.com/',
+			// target: 'http://10.86.59.79:8367/demo/',
+			// pathRewrite: {'^/ServerController': ''}
+			target: 'https://coop-fat.sammbo.com/',
 		},
 	}
 };
