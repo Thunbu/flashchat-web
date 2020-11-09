@@ -1,7 +1,12 @@
-#chat_root_container {
-	width: 100%;
+#root{
 	height: 100%;
 	overflow: auto;
+}
+#chat_root_container {
+	height: 100%;
+	min-height: var(--chat-default-height);
+	width: 100%;
+	min-width: var(--chat-default-width);
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -9,7 +14,6 @@
 	align-items: center;
 }
 #chat_base_container {
-	vertical-align: middle;
 	box-shadow: var(--shadow-plus);
 	width: var(--chat-default-width);
 	height: var(--chat-default-height);

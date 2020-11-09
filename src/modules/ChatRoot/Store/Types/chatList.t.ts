@@ -4,6 +4,7 @@ export interface ChatItemInterface {
     name: string,
     time: string,
     id: string,
+    type: 0|1, // 0 单聊  1 群聊
 }
 
 export interface ChatListStoreTypes {

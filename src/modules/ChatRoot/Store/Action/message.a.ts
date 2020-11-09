@@ -4,17 +4,20 @@ import {SendMsgDataJoinToRealData, SendMsgMetaDataJoinToRealData} from "../../Me
 import {IM_SendMessage} from "../../Methods/IM/function/_message";
 import {PublicMessageInteraction} from "../../Methods/IM/types/_message";
 import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
+import MessageContentsInterface = PublicMessageInteraction.MessageContentsInterface;
 
-export interface SendMsgMetaType {
+export interface SendMsgMetaType<T = MessageContentsInterface> {
     type: MessageTypeEnum,
-    content: string,
+    content: T,
     receiver: string,
     chatType: 0|1,
     sender: string,
 }
-export const SendMessage = (dispatch: StoreDispatchHandle, params: SendMsgMetaType): void => {
+export const SendMessage = <T = MessageContentsInterface>(
+    dispatch: StoreDispatchHandle, params: SendMsgMetaType<T>
+): void => {
     const data = SendMsgMetaDataJoinToRealData(params);
-    const MetaData = SendMsgDataJoinToRealData(data, params, params.sender, 0);
+    const MetaData = SendMsgDataJoinToRealData(data, params.sender, 0);
     dispatch({ type: ADD_MESSAGE_TO_MAP, data: MetaData });
     dispatch({
         type: ADD_MESSAGE_TO_CHAT,

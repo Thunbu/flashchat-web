@@ -17,6 +17,62 @@ export namespace PublicMessageInteraction {
      * @property {number} 10000 - 扩展类消息
      */
     export type MessageTypeEnum = 0|1|2|3|4|5;
+    export interface TextMessageContents {
+        text: string,
+        isAt?: boolean,
+        members?: string[]
+    }
+    export type ImageMessageContentsItem = {
+        type: 0|1|2, // 0 原图  1 大图   2 缩略图
+        url: string,
+        size: number,
+        height: number,
+        width: number,
+    }
+    export interface ImageMessageContents {
+        format: 0|1, // 0 png  1 jpg
+        imageList: ImageMessageContentsItem[],
+        isHD: boolean, // 是否高清
+    }
+    export interface AudioMessageContents {
+        format: number, // 类型
+        second: number, // 时长，单位：秒
+        size: number, // 大小，单位：字节
+        downUrl: string, // 下载地址
+        audio2Text: string, //  语音转文本
+        ext: string // 扩展，比如描述等
+    }
+    export interface VideoMessageContents {
+        coverUrl: string, // 视频封面地址
+        coverHeight: number, // 封面高
+        coverWidth: number, // 封面宽
+        coverSize: number, // 封面大小
+        coverFormat: 0|1|225, // 封面类型，0-JPG，1-PNG，225-未知类型
+        videoUrl: string, // 视频地址
+        videoSize: number, // 视频大小
+        duration: number, // 视频时长
+        videoFormat: 0|1|2|3|4|5|225, // 视频类型，0-AVI，1-RM，2-RMVB，3-WMV，4-MP4，5-MOV，225-未知类型
+        ext?: string, // 扩展，比如描述等
+    }
+    export interface FileMessageContents {
+        size: number, // 大小，单位：字节
+        filename: string, // 文件名
+        downUrl: string, // 下载地址
+        ext: string, // 扩展，比如描述等
+    }
+    export type MessageContentsInterface =
+        TextMessageContents
+        |ImageMessageContents
+        |AudioMessageContents
+        |VideoMessageContents
+        |FileMessageContents;
+    export interface MessageForContentChart {
+        0: TextMessageContents,
+        1: ImageMessageContents,
+        2: AudioMessageContents,
+        3: VideoMessageContents,
+        4: FileMessageContents
+    }
 }
 
 export namespace MessageLocalInteraction {
@@ -37,7 +93,7 @@ export namespace MessageLocalInteraction {
      * @property {any} domain - 元信息
      * @property {string} sender - 发送者
      */
-    export type MessageItemInterface = {
+    export type MessageItemInterface<T = PublicMessageInteraction.MessageContentsInterface> = {
         id: string,
         chatId: string,
         time: string|number,
@@ -46,7 +102,7 @@ export namespace MessageLocalInteraction {
         state: -1|0|1,
         isDelete: boolean,
         type: PublicMessageInteraction.MessageTypeEnum,
-        message: any,
+        message: T,
         domain: any,
         sender: string,
     };
@@ -96,7 +152,7 @@ export namespace MessageOnlineInteraction {
         isAdminDelete: boolean
         isRevocation: boolean
         isSelfDelete: boolean
-        message: any
+        message: PublicMessageInteraction.MessageContentsInterface
         offlinePush: boolean
         offlinePushInfo: any
         pAll: number
@@ -142,6 +198,8 @@ export namespace ExternalInteraction {
         message: T,
         domain: D
     }
-    export type IMSendMessageTypes<T = any, D = any> = IMSendMessageBaseTypes<T, D>;
+    export type IMSendMessageTypes<
+        T = PublicMessageInteraction.MessageContentsInterface,
+        D = any> = IMSendMessageBaseTypes<T, D>;
 }
 

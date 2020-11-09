@@ -17,5 +17,6 @@ export const IMChatSessionInfoJoinToLocal = (ChatList: IMGetChatSessionItem): Ch
         name: ChatList.sessionName,
         time: formatChatViewTime(ChatList.updateTime),
         id: ChatList.sessionId,
+        type: ChatList.sessionType
     }
 }

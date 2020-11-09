@@ -1,9 +1,15 @@
 import {StoreStatesTypes} from "../../../Store/store.i";
 import {SendMsgMetaType} from "../../../Store/Action/message.a";
-import {ExternalInteraction, MessageLocalInteraction, MessageOnlineInteraction} from "../types/_message";
+import {
+    ExternalInteraction,
+    MessageLocalInteraction,
+    MessageOnlineInteraction,
+    PublicMessageInteraction
+} from "../types/_message";
 import IMGetMessageInterface = MessageOnlineInteraction.IMGetMessageInterface;
 import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 import IMSendMessageTypes = ExternalInteraction.IMSendMessageTypes;
+import MessageContentsInterface = PublicMessageInteraction.MessageContentsInterface;
 
 /**
  * @author PengPeng
@@ -44,7 +50,9 @@ export const IMGetMessageJoinToLocal = (params: IMGetMessageInterface): MessageI
  * @param {SendMsgMetaType} params - 参数
  * @return {IMSendMessageTypes}
  */
-export const SendMsgMetaDataJoinToRealData = (params: SendMsgMetaType): IMSendMessageTypes => {
+export const SendMsgMetaDataJoinToRealData = <T>(
+    params: SendMsgMetaType<T>
+): IMSendMessageTypes<T> => {
     return {
         securityType: 0,
         receiver: params.receiver,
@@ -53,9 +61,7 @@ export const SendMsgMetaDataJoinToRealData = (params: SendMsgMetaType): IMSendMe
         type: params.type,
         id: window.SIM.utils.getGuid(4),
         time: new Date().getTime(),
-        message: {
-            text: params.content,
-        },
+        message: params.content,
         domain: {},
     };
 }
@@ -67,17 +73,15 @@ export const SendMsgMetaDataJoinToRealData = (params: SendMsgMetaType): IMSendMe
  * @name SendMsgDataJoinToRealData
  * @description 将发送消息出去的消息数据整合成本地展示需要的数据
  * @param {IMSendMessageTypes} Data - 数据
- * @param {SendMsgMetaType} params - 元数据
  * @param {string} sender - 发送者
  * @param {MessageItemInterface["state"]} status - 状态
  * @return {MessageItemInterface}
  */
-export const SendMsgDataJoinToRealData = (
-    Data: IMSendMessageTypes,
-    params: SendMsgMetaType,
+export const SendMsgDataJoinToRealData = <T>(
+    Data: IMSendMessageTypes<T>,
     sender: string,
     status: MessageItemInterface["state"]
-): MessageItemInterface => {
+): MessageItemInterface<T> => {
     return {
         id: Data.id,
         chatId: Data.receiver,

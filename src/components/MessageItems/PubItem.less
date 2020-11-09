@@ -6,7 +6,6 @@
 	flex-wrap: nowrap;
 	.__inner_message{
 		max-width: 70%;
-		overflow: hidden;
 		margin-left: 8px;
 	}
 	.__text_item{
@@ -17,6 +16,35 @@
 		border: 1px solid var(--border-default-color);
 		p{
 			word-break: break-all;
+		}
+	}
+	.__image_item{
+		max-width: 398px;
+		max-height: 334px;
+		overflow: hidden;
+		border-radius: var(--border-radius-plus);
+	}
+	.__video_item{
+		max-width: 398px;
+		max-height: 334px;
+		overflow: hidden;
+		border-radius: var(--border-radius-plus);
+		position: relative;
+		.__mask_item{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 2;
+			background-color: rgba(0,0,0,.4);
+			backdrop-filter: blur(3px);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			svg{
+				opacity: .5;
+			}
 		}
 	}
 	&.__isMe{

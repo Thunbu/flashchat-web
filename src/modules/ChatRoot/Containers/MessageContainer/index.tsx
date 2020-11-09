@@ -16,7 +16,9 @@ class MessageContainer extends React.Component<MessageContainerPropsInterface, a
         const { ChatItem, CurrentUser } = this.props;
         this.props.SendMessage({
             type,
-            content: val,
+            content: {
+                text: val
+            },
             chatType: 0,
             receiver: ChatItem.id,
             sender: CurrentUser.IMID,

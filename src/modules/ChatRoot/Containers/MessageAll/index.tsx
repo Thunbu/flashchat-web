@@ -27,6 +27,7 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
     }
 
     componentDidUpdate(prevProps: Readonly<MessageAllPropsInterface>, prevState: Readonly<MessageAllStateInterface>, snapshot?: any) {
+        // todo: 当上一次的props长度为30条的时候，说明这次的更新会导致第一条消息消失，所以，要将第一条消息的高度缓存清除，然后更新最后一条消息的缓存
         if (this.props.chatId !== prevProps.chatId) {
             this.ForceUpdate().then(() => {
                 this.ScrollToLastMessage();
@@ -49,11 +50,14 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
             <CellMeasurer cache={this.DefaultCellMeasurerCache} columnIndex={0}
                           parent={props.parent} key={props.key} rowIndex={props.index}>
                 {
-                    RenderMsgItemRows(
-                        Message,
-                        props,
-                        CurrentUser,
-                        SenderMsg
+                    ({ measure }) => (
+                        RenderMsgItemRows(
+                            Message,
+                            props,
+                            CurrentUser,
+                            SenderMsg,
+                            measure
+                        )
                     )
                 }
             </CellMeasurer>

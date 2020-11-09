@@ -21,7 +21,7 @@ const setting = {
 			pathRewrite: {'^/SDKController': ''}
 		},
 		'/ServerController': {
-			target: 'http://10.86.59.79:8367/',
+			target: 'http://10.86.59.79:8367/demo/',
 			pathRewrite: {'^/ServerController': ''}
 			// target: 'https://coop-fat.sammbo.com/',
 		},
