@@ -63,7 +63,7 @@ export interface IMGetChatSessionItem {
     invalid: 0|1
     isShow: 0|1
     isTop: 0|1
-    lastMsg: IMGetMessageInterface,
+    lastMsg: IMGetMessageInterface|undefined,
     messageCount: number
     notDisturb: 0|1
     securityType: 0|1
