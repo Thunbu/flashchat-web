@@ -24,11 +24,13 @@ export const SetChatListByResponse = (dispatch: StoreDispatchHandle, ChatList: I
     const listIds: string[] = [];
     ChatList.forEach((item) => {
         const ChatItem = IMChatSessionInfoJoinToLocal(item);
-        const Message = IMGetMessageJoinToLocal(item.lastMsg);
         listMap[ChatItem.id] = ChatItem;
         listIds.push(ChatItem.id);
-        dispatch({ type: ADD_MESSAGE_TO_MAP, data: Message });
-        dispatch({ type: ADD_MESSAGE_TO_CHAT, data: {chatId: Message.chatId, messageId: Message.id}});
+        if (item.lastMsg ) {
+            const Message = IMGetMessageJoinToLocal(item.lastMsg);
+            dispatch({ type: ADD_MESSAGE_TO_MAP, data: Message });
+            dispatch({ type: ADD_MESSAGE_TO_CHAT, data: {chatId: Message.chatId, messageId: Message.id}});
+        }
     });
     dispatch({
         type: SET_CHAT_LIST,
