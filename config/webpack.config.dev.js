@@ -17,12 +17,14 @@ const setting = {
 	proxy: {
 		'/SDKController': {
 			// target: 'http://webuat.sammbo.com:8777/',
-			target: 'http://10.86.59.79:8777/',
-			pathRewrite: {'^/SDKController': ''}
+			target: 'https://sdkdev-gateway.sammbo.com:8777/',
+			pathRewrite: {'^/SDKController': ''},
+			changeOrigin: true
 		},
 		'/ServerController': {
-			target: 'http://10.86.59.79:8367/demo/',
-			pathRewrite: {'^/ServerController': ''}
+			target: 'http://10.86.78.55:8367/demo/',
+			pathRewrite: {'^/ServerController': ''},
+			changeOrigin: true
 			// target: 'https://coop-fat.sammbo.com/',
 		},
 	}

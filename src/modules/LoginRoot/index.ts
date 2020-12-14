@@ -11,7 +11,7 @@ export const RunLogin = (userId: string): void => {
             window.location.href = './index.html';
         } else {
             window.alert('用户信息不存在！');
-            Login();
+            // Login();
         }
     }).catch((err) => {
         alert('登录失败！');

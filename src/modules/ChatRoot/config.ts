@@ -1,7 +1,7 @@
 
 // websocket target
 // export const __DefaultWSLocation: string = 'wss://wsuat.sammbo.com:8443';
-export const __DefaultWSLocation: string = 'ws://10.86.59.79:8326';
+export const __DefaultWSLocation: string = 'wss://sdkdev-websocket.sammbo.com:8326';
 
 // professional request proxy fieId
 export const __DefaultSDKHTTPLocation: string = '/SDKController';
