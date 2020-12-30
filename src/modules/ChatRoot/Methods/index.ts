@@ -31,7 +31,15 @@ export const RenderChatContainerComponent = (): React.ReactNodeArray => {
     })
 }
 
-
+/**
+ * @author: PengPeng
+ * @date: 12/30/20
+ * @function
+ * @name: formatChatViewTime
+ * @Description: format会话列表里面的时间
+ * @param: {string|number} time - 时间
+ * @return: {string} timeString
+ */
 export const formatChatViewTime = (time: string|number) => {
     const date = new Date();
     const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();

@@ -2,7 +2,7 @@ import {UPDATE_USER_MESSAGE, UserInterface} from "../../Store/Types/users.t";
 import {DefaultUser} from "../../Store/Data/users.data";
 import {ADD_MESSAGE_TO_CHAT, ADD_MESSAGE_TO_MAP} from "../../Store/Types/message.t";
 import {UPDATE_CHAT_ITEM} from "../../Store/Types/chatList.t";
-import {SIMLoginParams} from "./types/_login";
+import {SIMLoginErrorParams, SIMLoginParams} from "./types/_login";
 import {IMGetChatSessionInfoParams} from "./types/_chat";
 import {
     __DefaultSDKHTTPLocation,
@@ -18,6 +18,7 @@ import {IM_GetMultiPersonalData} from "./function/_user";
 import {IM_GetChatSessionInfo} from "./function/_chat";
 import {MessageOnlineInteraction} from "./types/_message";
 import IMGetMessageInterface = MessageOnlineInteraction.IMGetMessageInterface;
+import {CleanLocalLoginInformation} from "../Meta";
 
 /**
  * @author PengPeng
@@ -55,11 +56,34 @@ export const LoginSIM = <T = any>(userId: string, userSig: string): Promise<T> =
         account: userId,
         userSig: userSig,
         appversion: __IMLoginAppVersion,
-        isForce: true
+        isForce: true,
+        bundleId: window.location.host
     }
     return new Promise((resolve, reject) => {
         window.SIM.login(LoginObject, resolve, reject);
     });
+}
+
+/**
+ * @author: PengPeng
+ * @date: 12/30/20
+ * @function
+ * @name: SIMLoginError
+ * @Description: SIM登录失败的回调
+ * @param: {any} err - 错误信息
+ * @return: {void}
+ */
+export const SIMLoginError = (err: SIMLoginErrorParams) => {
+    if (err && err.code) {
+        switch (err.code) {
+            case 900003:
+            case 900004:
+                // 用户信息鉴权失败, 清除用户登录信息，返回登录页面
+                CleanLocalLoginInformation();
+                window.location.reload();
+                break;
+        }
+    }
 }
 
 /**

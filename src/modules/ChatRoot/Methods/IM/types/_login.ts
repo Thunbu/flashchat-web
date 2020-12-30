@@ -18,5 +18,18 @@ export interface SIMLoginParams {
     account: string,
     userSig: string,
     appversion: string,
-    isForce: boolean
+    isForce: boolean,
+    bundleId: string
+}
+
+export type SIMLoginErrorCode = 900003 | 900004;
+/**
+ * @author PengPeng
+ * @date 12/30/20
+ * @typedef SIMLoginErrorParams
+ * @description SIM登录失败的参数
+ * @property {SIMLoginErrorCode} code
+ */
+export interface SIMLoginErrorParams {
+    code: SIMLoginErrorCode
 }

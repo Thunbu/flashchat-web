@@ -3,9 +3,10 @@ import LeftMenu from "../LeftMenu";
 import ChatOuter from "../ChatOuter";
 import {connect} from "react-redux";
 import {MainProps, MainState, MainStoreAction, MainStoreProps} from "./index.s";
-import {InitSIM, ListenSIMEvents, LoginSIM} from "../../Methods/IM/im";
+import {InitSIM, ListenSIMEvents, LoginSIM, SIMLoginError} from "../../Methods/IM/im";
 import {IM_GetMultiPersonalData} from "../../Methods/IM/function/_user";
 import {IM_GetChatSessionList} from "../../Methods/IM/function/_chat";
+import {SIMLoginErrorParams} from "../../Methods/IM/types/_login";
 
 class Main extends React.Component<MainProps, MainState> {
     readonly state = {};
@@ -28,6 +29,9 @@ class Main extends React.Component<MainProps, MainState> {
             ListenSIMEvents();
             this.getLoginUserInfo();
             this.fetchChatList();
+        }).catch((err: SIMLoginErrorParams) => {
+            SIMLoginError(err);
+            console.log('websocket 登录失败----', err);
         });
     };
     protected getLoginUserInfo = () => {
