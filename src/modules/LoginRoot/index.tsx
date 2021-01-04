@@ -28,7 +28,7 @@ class AppLogin extends React.Component<any, any> {
         window.localStorage.clear();
     }
     protected onInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event && event.keyCode === 13) {
+        if (event.key === 'Enter') {
             this.onLogin(this.state.userId);
         }
     }
