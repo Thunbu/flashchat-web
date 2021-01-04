@@ -7,7 +7,7 @@ import Avatar from "../../components/Avatar";
 
 import './index.less';
 
-export const RunLogin = (userId: string): void => {
+const RunLogin = (userId: string): void => {
     GetLoginUserInfo(userId).then((res: any) => {
         if (res.data) {
             SetLoginInformation({ USERSIG: res.data, USERIMID: userId });
