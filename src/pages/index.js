@@ -1,4 +1,4 @@
-import Renderer from '../modules/ChatRoot';
-import './index.less';
+import Renderer from "../modules/ChatRoot/index";
+import "./index.less";
 
 Renderer();

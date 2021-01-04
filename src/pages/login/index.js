@@ -1,5 +1,5 @@
+import Login from "../../modules/LoginRoot/index";
 import './index.less';
-import Login from "../../modules/LoginRoot";
 
 Login();
 
