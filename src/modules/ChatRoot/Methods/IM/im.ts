@@ -170,7 +170,7 @@ export const OnGetNewMessage = (msg: IMGetMessageInterface): void => {
     console.log(msg);
     const Msg = IMGetMessageJoinToLocal(msg);
     GetUserInfo(Msg.sender);
-    CheckChatStatus(Msg.chatId, Msg.chatType);
+    // CheckChatStatus(Msg.chatId, Msg.chatType);
     store.dispatch({ type: ADD_MESSAGE_TO_MAP, data: Msg });
     store.dispatch({ type: ADD_MESSAGE_TO_CHAT, data: {chatId: Msg.chatId, messageId: Msg.id}});
     return void(0);

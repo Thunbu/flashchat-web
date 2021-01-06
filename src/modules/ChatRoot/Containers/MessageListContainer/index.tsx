@@ -19,7 +19,7 @@ class MessageListContainer extends React.Component<MessageListContainerPropsInte
     render() {
         return (
             <div id={'message_list_container'}>
-                <MessageAll list={this.getMessageList()} chatId={this.props.chat.id} />
+                <MessageAll list={this.getMessageList()} chat={this.props.chat} />
             </div>
         )
     }

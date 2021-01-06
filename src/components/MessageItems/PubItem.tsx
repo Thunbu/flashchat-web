@@ -57,6 +57,7 @@ export const RenderMsgItemComponent = (MessageItem: MessageItemInterface, props:
  * @param {UserInterface} CurrentUser - 当前用户信息
  * @param {UserInterface} SenderUser - 发送者信息
  * @param {Function} measure - 重新计算的函数
+ * @param {any} registerChild - 注册节点
  * @return {React.ReactNode}
  */
 
@@ -65,11 +66,12 @@ export const RenderMsgItemRows = (
     props: ListRowProps,
     CurrentUser: CurrentUserInterface,
     SenderUser: UserInterface,
-    measure: () => void
+    measure: () => void,
+    registerChild: any
 ): React.ReactNode => {
     const isMeFlag: boolean = CurrentUser.IMID === MessageItem.sender;
     return (
-        <div className={`__pub_item ${isMeFlag ? '__isMe' : ''}`} style={props.style}>
+        <div ref={registerChild} className={`__pub_item ${isMeFlag ? '__isMe' : ''}`} style={props.style}>
             <div className={'__user_avatar'}>
                 <Avatar src={SenderUser.avatar} width={42} height={42} round={true} title={SenderUser.name} />
             </div>

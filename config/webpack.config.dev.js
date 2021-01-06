@@ -23,9 +23,9 @@ const setting = {
 		},
 		'/ServerController': {
 			// target: 'http://10.86.78.55:8367/demo/', // dev
-			target: 'http://developer.sammbo.com/ServerController/', // test
+			target: 'https://developer.sammbo.com/ServerController/', // test
 			pathRewrite: {'^/ServerController': ''},
-			changeOrigin: true
+			changeOrigin: true,
 		},
 	}
 };

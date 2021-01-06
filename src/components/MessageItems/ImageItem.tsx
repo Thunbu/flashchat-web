@@ -14,10 +14,6 @@ interface ImageItemProps extends MessageItemProps {
 }
 
 export default class ImageItem extends React.Component<ImageItemProps, any>{
-    componentDidMount() {
-        console.log(this.props);
-    }
-
     protected getPreviewImageURL = (imageList: ImageMessageContentsItem[]) => {
         for (let i = 0; i < imageList.length; i++) {
             if (imageList[i].type === 2) {

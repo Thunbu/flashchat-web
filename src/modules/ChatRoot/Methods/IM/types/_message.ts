@@ -1,3 +1,5 @@
+
+// 关于消息公共类型的定义，作用于 本地、远程、本地sdk
 export namespace PublicMessageInteraction {
     /**
      * @author PengPeng
@@ -75,6 +77,7 @@ export namespace PublicMessageInteraction {
     }
 }
 
+// 关于消息本地处理的类型定义，只作用于本地
 export namespace MessageLocalInteraction {
     /**
      * @author PengPeng
@@ -107,6 +110,8 @@ export namespace MessageLocalInteraction {
         sender: string,
     };
 }
+
+// 关于消息远程数据类型的定义，只作用于远程数据的类型定义
 export namespace MessageOnlineInteraction {
     /**
      * @author PengPeng
@@ -154,7 +159,7 @@ export namespace MessageOnlineInteraction {
         isSelfDelete: boolean
         message: PublicMessageInteraction.MessageContentsInterface
         offlinePush: boolean
-        offlinePushInfo: any
+        offlinePushInfo: PublicMessageInteraction.MessageContentsInterface
         pAll: number
         pReaded: number
         readed: boolean
@@ -170,7 +175,21 @@ export namespace MessageOnlineInteraction {
         userId: string
         varStatus: number
     }
+    /**
+     * @author PengPeng
+     * @date 11/2/20
+     * @typedef IMGetMsgListAndCdMsgListResponse
+     * @description 通过sdk获取到的消息与指令列表
+     * @property {any[]} cdMsg - 指令列表
+     * @property {IMGetMessageInterface[]} msg - 消息列表
+     */
+    export interface IMGetMsgListAndCdMsgListResponse {
+        cdMsg: any[],
+        msg: IMGetMessageInterface[]
+    }
 }
+
+// 关于消息本地与远程的交互的参数定义声明
 export namespace ExternalInteraction {
     /**
      * @author PengPeng
@@ -201,5 +220,26 @@ export namespace ExternalInteraction {
     export type IMSendMessageTypes<
         T = PublicMessageInteraction.MessageContentsInterface,
         D = any> = IMSendMessageBaseTypes<T, D>;
+
+    /**
+     * @author PengPeng
+     * @date 11/2/20
+     * @typedef IMGetMessageListParams
+     * @description 通过SDK获取线上消息列表
+     * @property {string} chatId - 会话ID
+     * @property {number<'0'|'1'>} securityType - 密聊类型
+     * @property {number<'0'|'1'>} chatType - 会话类型
+     * @property {?string} msgId - 消息ID，以此消息ID作为基准拉取前后的消息
+     * @property {number} rows - 拉取的条数
+     * @property {number<'0'|'1'|'2'>} direct - 拉取的方向，0向下拉，1向上拉，2前后都有
+     */
+    export interface IMGetMessageListParams {
+        chatId: string,
+        chatType: 0|1,
+        securityType: 0|1,
+        msgId?: string,
+        rows?: number,
+        direct?: 0|1|2
+    }
 }
 
