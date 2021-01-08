@@ -5,7 +5,7 @@
 export const __DefaultWSLocation: string = 'wss://sdk-websocket.sammbo.com:8326'; // prod
 
 // professional request proxy fieId
-export const __DefaultSDKHTTPLocation: string = '/SDKController';
+export const __DefaultSDKHTTPLocation: string = '/DSSP-PROD';
 
 // sim login use fieId
 export const __IMLoginAppId: string = '1000000217';

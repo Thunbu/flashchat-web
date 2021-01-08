@@ -2,7 +2,7 @@
 // 统一地址
 import {LoginUserInformation} from "./config.t";
 
-export const RequestBaseURL = '/ServerController';
+export const RequestBaseURL = '/DLSP-PROD';
 
 // 用户图鉴
 export const UserList: LoginUserInformation[] = [
