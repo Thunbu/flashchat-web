@@ -17,13 +17,15 @@ const setting = {
 	proxy: {
 		'/SDKController': {
 			// target: 'https://sdkdev-gateway.sammbo.com:8777/', // dev
-			target: 'https://sdktest-gateway.sammbo.com:18777/', // test
+			// target: 'https://sdktest-gateway.sammbo.com:18777/', // test
+			target: 'https://sdk-gateway.sammbo.com:8777/', // test
 			pathRewrite: {'^/SDKController': ''},
 			changeOrigin: true
 		},
 		'/ServerController': {
 			// target: 'http://10.86.78.55:8367/demo/', // dev
-			target: 'http://developer.sammbo.com/ServerController/', // test
+			// target: 'http://developer.sammbo.com/ServerController/', // test
+			target: 'http://developer.sammbo.com/ServerController/', // prod
 			pathRewrite: {'^/ServerController': ''},
 			changeOrigin: true
 		},
