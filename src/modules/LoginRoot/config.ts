@@ -1,8 +1,11 @@
+export interface LoginUserInformation {
+    userIMId: string,
+    userName: string,
+    userAvatar: string,
+}
 
 // 统一地址
-import {LoginUserInformation} from "./config.t";
-
-export const RequestBaseURL = '/ServerController';
+export const RequestBaseURL = '/DLSP-DEV';
 
 // 用户图鉴
 export const UserList: LoginUserInformation[] = [

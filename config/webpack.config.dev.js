@@ -15,17 +15,32 @@ const setting = {
 		errors: true
 	},
 	proxy: {
-		'/SDKController': {
-			// target: 'https://sdkdev-gateway.sammbo.com:8777/', // dev
-			target: 'https://sdktest-gateway.sammbo.com:18777/', // test
-			pathRewrite: {'^/SDKController': ''},
+		// prod
+		'/DSSP-PROD': {
+			target: 'https://developer.sammbo.com/',
 			changeOrigin: true
 		},
-		'/ServerController': {
-			// target: 'http://10.86.78.55:8367/demo/', // dev
-			target: 'https://developer.sammbo.com/ServerController/', // test
-			pathRewrite: {'^/ServerController': ''},
-			changeOrigin: true,
+		'/DLSP-PROD': {
+			target: 'https://developer.sammbo.com/',
+			changeOrigin: true
+		},
+		// test
+		'/DSSP-TEST': {
+			target: 'https://developer.sammbo.com/',
+			changeOrigin: true
+		},
+		'/DLSP-TEST': {
+			target: 'https://developer.sammbo.com/',
+			changeOrigin: true
+		},
+		// dev
+		'/DSSP-DEV': {
+			target: 'https://developer.sammbo.com/',
+			changeOrigin: true
+		},
+		'/DLSP-DEV': {
+			target: 'https://developer.sammbo.com/',
+			changeOrigin: true
 		},
 	}
 };
