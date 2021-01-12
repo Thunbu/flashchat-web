@@ -57,7 +57,7 @@ export const LoginSIM = <T = any>(userId: string, userSig: string): Promise<T> =
         userSig: userSig,
         appversion: __IMLoginAppVersion,
         isForce: true,
-        bundleId: window.location.host
+        bundleId: 'developer.sammbo.com'
     }
     return new Promise((resolve, reject) => {
         window.SIM.login(LoginObject, resolve, reject);
