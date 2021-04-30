@@ -4,10 +4,11 @@ import EmptySpace from "../../../../components/EmptySpace";
 import {
     MessageMainPropsInterface,
     MessageMainStateInterface,
-    MessageMainUseStoreActions,
-    MessageMainUseStoreStates
-} from "./index.s";
+    MessageMainUseStoreActionsInterface,
+    MessageMainUseStoreStatesInterface
+} from "./index.i";
 import MessageContainer from "../MessageContainer";
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
 
 class MessageMain extends React.Component<MessageMainPropsInterface, MessageMainStateInterface>{
     render() {
@@ -24,5 +25,14 @@ class MessageMain extends React.Component<MessageMainPropsInterface, MessageMain
         );
     }
 }
+
+
+export const MessageMainUseStoreStates = (state: StoreStatesTypes): MessageMainUseStoreStatesInterface => ({
+    ActiveChat: state.ChatList.active,
+    GetChatItemByKey: (key: string) => state.ChatList.listMap[key]
+});
+export const MessageMainUseStoreActions = (dispatch: StoreDispatchHandle): MessageMainUseStoreActionsInterface => ({
+
+});
 
 export default connect(MessageMainUseStoreStates, MessageMainUseStoreActions)(MessageMain);

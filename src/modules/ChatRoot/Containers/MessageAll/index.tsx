@@ -4,12 +4,14 @@ import {connect} from "react-redux";
 import {
     MessageAllPropsInterface,
     MessageAllStateInterface,
-    MessageAllUseStoreAction,
-    MessageAllUseStoreState
+    MessageAllUseStoreActionInterface,
+    MessageAllUseStoreStateInterface
 } from "./index.i";
 import {AutoSizer, CellMeasurer, CellMeasurerCache, List, ListRowProps} from "react-virtualized";
 import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
 import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
+import {DefaultUser} from "../../Store/Data/users.data";
 
 class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllStateInterface>{
     VirtualScroller: List|null = null;
@@ -108,5 +110,14 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
         )
     }
 }
+
+
+export const MessageAllUseStoreAction = (dispatch: StoreDispatchHandle): MessageAllUseStoreActionInterface => ({
+
+});
+export const MessageAllUseStoreState = (state: StoreStatesTypes): MessageAllUseStoreStateInterface => ({
+    CurrentUser: state.System.CurrentUser,
+    GetUserInfo: (userId: string) => state.Users.UserMap[userId] || DefaultUser,
+});
 
 export default connect(MessageAllUseStoreState, MessageAllUseStoreAction)(MessageAll);

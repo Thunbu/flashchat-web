@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const deleteFolderRecursive = require('./tools').deleteFolderRecursive;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");//css分离打包
+const { proxy, env } = require('../project.config');
 
 const setting = {
 	contentBase: path.resolve(__dirname, '../src/pages'),
@@ -14,35 +15,7 @@ const setting = {
 		warnings: true,
 		errors: true
 	},
-	proxy: {
-		// prod
-		'/DSSP-PROD': {
-			target: 'https://developer.sammbo.com/',
-			changeOrigin: true
-		},
-		'/DLSP-PROD': {
-			target: 'https://developer.sammbo.com/',
-			changeOrigin: true
-		},
-		// test
-		'/DSSP-TEST': {
-			target: 'https://developer.sammbo.com/',
-			changeOrigin: true
-		},
-		'/DLSP-TEST': {
-			target: 'https://developer.sammbo.com/',
-			changeOrigin: true
-		},
-		// dev
-		'/DSSP-DEV': {
-			target: 'https://developer.sammbo.com/',
-			changeOrigin: true
-		},
-		'/DLSP-DEV': {
-			target: 'https://developer.sammbo.com/',
-			changeOrigin: true
-		},
-	}
+	proxy: proxy
 };
 baseConfig.devtool = '#eval-source-map';
 baseConfig.output.publicPath = '/';
@@ -81,7 +54,7 @@ baseConfig.devServer = setting; 					// 配置服务以及代理
 baseConfig.devtool = 'cheap-module-eval-source-map'; 	// 生成source map 以供调试
 baseConfig.plugins.push(
 	new webpack.DefinePlugin({
-		'process.env.NODE_ENV': '"development"'
+		'process.env.NODE_ENV': '"' + env + '"'
 	})
 );
 

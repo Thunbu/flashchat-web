@@ -1,9 +1,15 @@
 import * as React from "react";
 import LeftMenuTabItem from "../../../../components/LeftMenuTabItem";
 import {connect} from "react-redux";
-import {LeftMenuProps, LeftMenuStoreAction, LeftMenuStoreState} from "./index.s";
+import {
+    LeftMenuInheritStoreStates,
+    LeftMenuProps,
+    LeftMenuUseStoreActions
+} from "./index.i";
 import {TabContainers} from "../../Store/Types/system.t";
 import Avatar from "../../../../components/Avatar";
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
+import {UpdateActiveContainer} from "../../Store/Action/system.a";
 
 class LeftMenu extends React.Component<LeftMenuProps, any> {
     protected onLeftMenuClick = (menuId: TabContainers) => {
@@ -30,4 +36,15 @@ class LeftMenu extends React.Component<LeftMenuProps, any> {
         );
     }
 }
+
+
+export const LeftMenuStoreState = (state: StoreStatesTypes): LeftMenuInheritStoreStates => ({
+    Containers: state.System.Containers,
+    ActiveContainer: state.System.active,
+    CurrentUserAvatar: state.System.CurrentUser.avatar
+});
+export const LeftMenuStoreAction = (dispatch: StoreDispatchHandle): LeftMenuUseStoreActions => ({
+    UpdateActiveContainer: (containerId: TabContainers) => UpdateActiveContainer(dispatch, { containerId })
+});
+
 export default connect(LeftMenuStoreState, LeftMenuStoreAction)(LeftMenu);

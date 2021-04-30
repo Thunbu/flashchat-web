@@ -1,15 +1,16 @@
 import * as React from "react";
 import ChatHeader from "../../../../components/ChatHeader";
 import {
-    MessageContainerPropsInterface,
-    MessageContainerUseStoreActions,
-    MessageContainerUseStoreStates
-} from "./index.s";
+    MessageContainerPropsInterface, MessageContainerUseStoreActionProps,
+    MessageContainerUseStoreStateProps,
+} from "./index.i";
 import MessageEditorContainer from "../MessageEditorContainer";
 import MessageListContainer from "../MessageListContainer";
 import {connect} from "react-redux";
 import {PublicMessageInteraction} from "../../Methods/IM/types/_message";
 import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
+import {SendMessage, SendMsgMetaType} from "../../Store/Action/message.a";
 
 class MessageContainer extends React.Component<MessageContainerPropsInterface, any>{
     protected onSubmit = (val: string, type: MessageTypeEnum) => {
@@ -35,5 +36,13 @@ class MessageContainer extends React.Component<MessageContainerPropsInterface, a
         )
     }
 }
+
+
+export const MessageContainerUseStoreStates = (state: StoreStatesTypes): MessageContainerUseStoreStateProps => ({
+    CurrentUser: state.System.CurrentUser
+});
+export const MessageContainerUseStoreActions = (dispatch: StoreDispatchHandle): MessageContainerUseStoreActionProps => ({
+    SendMessage: (params: SendMsgMetaType) => SendMessage(dispatch, params)
+});
 
 export default connect(MessageContainerUseStoreStates, MessageContainerUseStoreActions)(MessageContainer);

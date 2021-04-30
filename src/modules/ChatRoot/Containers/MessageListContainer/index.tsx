@@ -3,11 +3,11 @@ import MessageAll from "../MessageAll";
 import {connect} from "react-redux";
 import {
     MessageListContainerPropsInterface, MessageListContainerStateInterface,
-    MessageListContainerUseStoreActions,
-    MessageListContainerUseStoreStates
-} from "./index.s";
+    MessageListUseStoreActionsInterface, MessageListUseStoreStatesInterface
+} from "./index.i";
 import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
 import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
 
 
 class MessageListContainer extends React.Component<MessageListContainerPropsInterface, MessageListContainerStateInterface>{
@@ -24,4 +24,16 @@ class MessageListContainer extends React.Component<MessageListContainerPropsInte
         )
     }
 }
+
+
+export const MessageListContainerUseStoreStates = (state: StoreStatesTypes): MessageListUseStoreStatesInterface => ({
+    GetMessageById: (id: string) => state.Message.MessageMap[id],
+    GetChatMessagesByChatId: (id: string) => state.Message.ChatMessageList[id],
+    CurrentUser: state.System.CurrentUser,
+    GetUserInfo: (userId: string) => state.ChatList.listMap[userId]
+});
+export const MessageListContainerUseStoreActions = (dispatch: StoreDispatchHandle): MessageListUseStoreActionsInterface => ({
+
+})
+
 export default connect(MessageListContainerUseStoreStates, MessageListContainerUseStoreActions)(MessageListContainer);

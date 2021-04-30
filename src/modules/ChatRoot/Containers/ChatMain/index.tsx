@@ -1,8 +1,14 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {ChatMainPropsTypes, ChatMainStateTypes, ChatMainUseStoreAction, ChatMainUseStoreState} from "./index.s";
+import {
+    ChatMainPropsTypes,
+    ChatMainStateTypes,
+    ChatMainUseStoreActionTypes,
+    ChatMainUseStoreStateTypes
+} from "./index.i";
 import ChatList from "../ChatList";
 import MessageMain from "../MessageMain";
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
 
 class ChatMain extends React.Component<ChatMainPropsTypes, ChatMainStateTypes> {
     render() {
@@ -21,4 +27,11 @@ class ChatMain extends React.Component<ChatMainPropsTypes, ChatMainStateTypes> {
         );
     }
 }
+
+export const ChatMainUseStoreState = (state: StoreStatesTypes): ChatMainUseStoreStateTypes => ({
+    ActiveContainer: state.System.active
+});
+export const ChatMainUseStoreAction = (dispatch: StoreDispatchHandle): ChatMainUseStoreActionTypes => ({
+
+});
 export default connect(ChatMainUseStoreState, ChatMainUseStoreAction)(ChatMain);

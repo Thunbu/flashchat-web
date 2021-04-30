@@ -1,13 +1,13 @@
 import {ActionInterface} from "./store.i";
 import {ADD_MESSAGE_TO_CHAT, ADD_MESSAGE_TO_MAP, MessageStoreTypes, UPDATE_MESSAGE_STATE} from "./Types/message.t";
-import {__DEMOSaveToMemoryMsgLength} from "../config";
+import {_DEMOSaveToMemoryMsgLength} from "../../../config";
 
 interface HandledChatMessageListReturnVal{
     Result: string[],
     Deduction: string[]
 }
 const GetHandledChatMessageList = (list: string[]): HandledChatMessageListReturnVal => {
-    const length = __DEMOSaveToMemoryMsgLength;
+    const length = _DEMOSaveToMemoryMsgLength;
     let Result: string[] = list.length > length ? list.slice(length - length*2) : list;
     const Deduction: string[] = list.length > length ? list.slice(0, list.length - length) : [];
     return {

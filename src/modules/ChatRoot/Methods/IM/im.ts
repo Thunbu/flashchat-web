@@ -4,13 +4,6 @@ import {ADD_MESSAGE_TO_CHAT, ADD_MESSAGE_TO_MAP} from "../../Store/Types/message
 import {UPDATE_CHAT_ITEM} from "../../Store/Types/chatList.t";
 import {SIMLoginErrorParams, SIMLoginParams} from "./types/_login";
 import {IMGetChatSessionInfoParams} from "./types/_chat";
-import {
-    __DefaultSDKHTTPLocation,
-    __DefaultWSLocation,
-    __IMLoginAppId,
-    __IMLoginAppVersion,
-    __IMLoginTerminal
-} from "../../config";
 import {IMUserMessageJoinToLocal} from "./transform/_user";
 import {IMChatSessionInfoJoinToLocal} from "./transform/_chat";
 import {IMGetMessageJoinToLocal} from "./transform/_message";
@@ -19,6 +12,7 @@ import {IM_GetChatSessionInfo} from "./function/_chat";
 import {MessageOnlineInteraction} from "./types/_message";
 import IMGetMessageInterface = MessageOnlineInteraction.IMGetMessageInterface;
 import {CleanLocalLoginInformation} from "../Meta";
+import {_IMAppId, _IMAppVersion, _IMBundleId, _IMPFRequestBaseURL, _IMTerminal, _WSLocation} from "../../../../config";
 
 /**
  * @author PengPeng
@@ -31,8 +25,8 @@ import {CleanLocalLoginInformation} from "../Meta";
 export const InitSIM = <T = any>(): Promise<T> => {
     return new Promise((resolve, reject) => {
         window.SIM.init({
-            serverip: __DefaultWSLocation,
-            apiBaseUrl: __DefaultSDKHTTPLocation,
+            serverip: _WSLocation,
+            apiBaseUrl: _IMPFRequestBaseURL,
             debug: false
         }, resolve, reject);
     });
@@ -50,14 +44,14 @@ export const InitSIM = <T = any>(): Promise<T> => {
  */
 export const LoginSIM = <T = any>(userId: string, userSig: string): Promise<T> => {
     const LoginObject: SIMLoginParams = {
-        appId: __IMLoginAppId,
-        terminal: __IMLoginTerminal,
         userId: userId,
         account: userId,
         userSig: userSig,
-        appversion: __IMLoginAppVersion,
         isForce: true,
-        bundleId: 'developer.sammbo.com'
+        appId: _IMAppId,
+        terminal: _IMTerminal,
+        appversion: _IMAppVersion,
+        bundleId: _IMBundleId
     }
     return new Promise((resolve, reject) => {
         window.SIM.login(LoginObject, resolve, reject);

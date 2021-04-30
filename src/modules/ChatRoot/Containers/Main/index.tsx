@@ -2,11 +2,21 @@ import * as React from "react";
 import LeftMenu from "../LeftMenu";
 import ChatOuter from "../ChatOuter";
 import {connect} from "react-redux";
-import {MainProps, MainState, MainStoreAction, MainStoreProps} from "./index.s";
+import {
+    MainProps,
+    MainState,
+    MainUseStoreActionTypes,
+    MainUseStoreStateTypes
+} from "./index.i";
 import {InitSIM, ListenSIMEvents, LoginSIM, SIMLoginError} from "../../Methods/IM/im";
 import {IM_GetMultiPersonalData} from "../../Methods/IM/function/_user";
 import {IM_GetChatSessionList} from "../../Methods/IM/function/_chat";
 import {SIMLoginErrorParams} from "../../Methods/IM/types/_login";
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
+import {UpdateCurrentUserParams} from "../../Store/Types/system.t";
+import {UpdateCurrentUserInfo} from "../../Store/Action/system.a";
+import {IMGetChatSessionItem} from "../../Methods/IM/types/_chat";
+import {SetChatListByResponse} from "../../Store/Action/chatList.a";
 
 class Main extends React.Component<MainProps, MainState> {
     readonly state = {};
@@ -63,5 +73,16 @@ class Main extends React.Component<MainProps, MainState> {
         );
     }
 }
+
+
+export const MainStoreProps = (state: StoreStatesTypes): MainUseStoreStateTypes => ({
+    UserIMID: state.System.CurrentUser.IMID,
+    UserSig: state.System.CurrentUser.sig,
+});
+
+export const MainStoreAction = (dispatch: StoreDispatchHandle): MainUseStoreActionTypes => ({
+    UpdateCurrentUserInfo: (params: UpdateCurrentUserParams) => UpdateCurrentUserInfo(dispatch, params),
+    SetChatListByResponse: (params: IMGetChatSessionItem[]) => SetChatListByResponse(dispatch, params),
+});
 
 export default connect(MainStoreProps, MainStoreAction)(Main);

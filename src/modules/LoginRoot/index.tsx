@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { GetLoginUserInfo } from "./Apis";
 import { SetLoginInformation } from "./Methods/Login";
-import { UserList } from "./config";
+import { UserList } from "./baseMsg";
 import Avatar from "../../components/Avatar";
 
 import './index.less';

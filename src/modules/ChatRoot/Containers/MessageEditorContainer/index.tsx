@@ -1,16 +1,19 @@
 import * as React from "react";
 import {
-    MessageEditorContainerProps, MessageEditorStateInterface, MessageEditorUseStoreActionProps,
-    MessageEditorUseStoreStateProps
-} from "./index.s";
+    MessageEditorContainerProps,
+    MessageEditorStateInterface,
+    MessageEditorUseStoreActionPropsInterface,
+    MessageEditorUseStoreStatePropsInterface, SendMsgExtParams
+} from "./index.i";
 import EditorToolBar from "../../../../components/EditorToolBar";
 import EditorComponent from "../../../../components/EditorComponent";
 import {PublicMessageInteraction} from "../../Methods/IM/types/_message";
 import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
-import ImageMessageContentsItem = PublicMessageInteraction.ImageMessageContentsItem;
 import {connect} from "react-redux";
 import MessageForContentChart = PublicMessageInteraction.MessageForContentChart;
 import {DefaultMessageItemEnum} from "../../dafault.data";
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
+import {SendMessage} from "../../Store/Action/message.a";
 
 class MessageEditorContainer extends
     React.Component<
@@ -55,4 +58,23 @@ class MessageEditorContainer extends
     }
 }
 
+
+export const MessageEditorUseStoreStateProps = (state: StoreStatesTypes)
+    : MessageEditorUseStoreActionPropsInterface => ({
+    ActiveChat: state.ChatList.active,
+    GetChatItemByKey: (key: string) => state.ChatList.listMap[key],
+    CurrentUser: state.System.CurrentUser
+});
+export const MessageEditorUseStoreActionProps = (dispatch: StoreDispatchHandle)
+    : MessageEditorUseStoreStatePropsInterface => ({
+    SendMsg: <T extends {}>(content: T, type: MessageTypeEnum, params: SendMsgExtParams): void => {
+        SendMessage<T>(dispatch, {
+            content,
+            type,
+            receiver: params.receiver,
+            chatType: params.chatType,
+            sender: params.sender,
+        })
+    }
+})
 export default connect(MessageEditorUseStoreStateProps, MessageEditorUseStoreActionProps)(MessageEditorContainer);

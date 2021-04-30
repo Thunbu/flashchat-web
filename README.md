@@ -27,16 +27,11 @@ IE浏览器要求IE10及以上才支持；Chrome浏览器需要40版本以上内
 
 # 1.4 配置更改
 
-配置文件：
-> config/webpack.config.dev.js
+配置代理：
+> project.config.js
 
-修改 ```setting.proxy``` 更改代理实现
+根据环境修改 ```proxy``` 更改代理实现
 
-> src/modules/ChatRoot/config.ts
 
-修改 ```__DefaultWSLocation``` 为ws的地址  
-修改 ```__DefaultSDKHTTPLocation``` 对应webpack代理路径
-
-> src/modules/LoginRoot/config.ts
-
-修改 ```RequestBaseURL``` 对应webpack代理路径
+IM相关配置：
+> src/config.ts

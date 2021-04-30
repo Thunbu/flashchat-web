@@ -3,10 +3,11 @@ import {connect} from "react-redux";
 import {
     ChatOuterPropsTypes,
     ChatOuterStateTypes,
-    ChatOuterUseStoreActionsMap,
-    ChatOuterUseStoreStateMap
-} from "./index.store";
+    ChatOuterUseStoreActionsMapTypes,
+    ChatOuterUseStoreStateMapTypes
+} from "./index.i";
 import {RenderChatContainerComponent} from "../../Methods";
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
 
 class ChatOuter extends React.Component<ChatOuterPropsTypes, ChatOuterStateTypes> {
     render() {
@@ -17,4 +18,13 @@ class ChatOuter extends React.Component<ChatOuterPropsTypes, ChatOuterStateTypes
         );
     }
 }
+
+
+export const ChatOuterUseStoreStateMap = (state: StoreStatesTypes): ChatOuterUseStoreStateMapTypes => ({
+    Containers: state.System.Containers
+});
+export const ChatOuterUseStoreActionsMap = (dispatch: StoreDispatchHandle): ChatOuterUseStoreActionsMapTypes => ({
+
+});
+
 export default connect(ChatOuterUseStoreStateMap, ChatOuterUseStoreActionsMap)(ChatOuter);

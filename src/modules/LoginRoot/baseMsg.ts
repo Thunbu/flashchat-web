@@ -4,9 +4,6 @@ export interface LoginUserInformation {
     userAvatar: string,
 }
 
-// 统一地址
-export const RequestBaseURL = '/DLSP-PROD';
-
 // 用户图鉴
 export const UserList: LoginUserInformation[] = [
     {

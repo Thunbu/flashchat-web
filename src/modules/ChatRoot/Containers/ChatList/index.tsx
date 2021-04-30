@@ -5,10 +5,12 @@ import ChatListItem from "../../../../components/ChatListItem";
 import {
     ChatListComponentPropsInterface,
     ChatListComponentStatesInterface,
-    ChatListUseStoreActions,
-    ChatListUseStoreStates
-} from "./index.s";
+    ChatListUseStoreActionsTypes,
+    ChatListUseStoreStatesTypes
+} from "./index.i";
 import {ChatItemInterface} from "../../Store/Types/chatList.t";
+import {StoreDispatchHandle, StoreStatesTypes} from "../../Store/store.i";
+import {ChangeActiveChat} from "../../Store/Action/chatList.a";
 
 class ChatList extends React.Component<ChatListComponentPropsInterface, ChatListComponentStatesInterface>{
     protected onChatClick = (event: React.MouseEvent, activeChat: ChatItemInterface) => {
@@ -36,5 +38,21 @@ class ChatList extends React.Component<ChatListComponentPropsInterface, ChatList
         );
     }
 }
+
+
+export const ChatListUseStoreStates = (state: StoreStatesTypes): ChatListUseStoreStatesTypes => ({
+    ChatList: state.ChatList.list,
+    activeChat: state.ChatList.active,
+    GetChatItemByKey: (key) => state.ChatList.listMap[key],
+    GetChatLastMsg: (chatId: string) => {
+        const chatMsgList = state.Message.ChatMessageList[chatId];
+        if (chatMsgList) {
+            return state.Message.MessageMap[chatMsgList.slice(-1)[0]];
+        }
+    }
+});
+export const ChatListUseStoreActions = (dispatch: StoreDispatchHandle): ChatListUseStoreActionsTypes => ({
+    ChangeActiveChat: (activeChat: ChatItemInterface) => ChangeActiveChat(dispatch, activeChat)
+});
 
 export default connect(ChatListUseStoreStates, ChatListUseStoreActions)(ChatList);
