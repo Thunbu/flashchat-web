@@ -2,16 +2,16 @@ import * as React from "react";
 import {MessageLocalInteraction, PublicMessageInteraction} from "../../modules/ChatRoot/Methods/IM/types/_message";
 import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 import MessageForContentChart = PublicMessageInteraction.MessageForContentChart;
-import {MessageItemProps} from "./PubItem";
 import Image from "../Image";
 import * as VideoImage from '../../assets/images/index/video_play.svg';
+import {MessageItemProps} from "./Index.i";
 
 export interface VideoItemProps extends MessageItemProps {
     Message: MessageItemInterface<MessageForContentChart['3']>
 }
 export default class VideoItem extends React.Component<VideoItemProps, any>{
     protected onLoad = () => {
-        this.props.measure();
+        this.props.onLoad();
     };
     render() {
         const { Message } = this.props;

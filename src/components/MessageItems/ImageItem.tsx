@@ -7,7 +7,7 @@ import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 import MessageForContentChart = PublicMessageInteraction.MessageForContentChart;
 import Image from "../Image";
 import ImageMessageContentsItem = PublicMessageInteraction.ImageMessageContentsItem;
-import {MessageItemProps} from "./PubItem";
+import {MessageItemProps} from "./Index.i";
 
 interface ImageItemProps extends MessageItemProps {
     Message: MessageItemInterface<MessageForContentChart['1']>,
@@ -23,7 +23,7 @@ export default class ImageItem extends React.Component<ImageItemProps, any>{
         return imageList[0];
     }
     protected onLoad = () => {
-        this.props.measure();
+        this.props.onLoad();
     }
     render() {
         const { Message } = this.props;

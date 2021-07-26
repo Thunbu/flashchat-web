@@ -11,6 +11,8 @@ import {AutoSizer, CellMeasurer, CellMeasurerCache, List, ListRowProps, ScrollPa
 import {MessageLocalInteraction} from "../../Methods/IM/types/_message";
 import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 import {RenderedRows} from "react-virtualized/dist/es/List";
+import {CurrentUserInterface} from "../../Store/Types/system.t";
+import {UserInterface} from "../../Store/Types/users.t";
 
 class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllStateInterface>{
     readonly state = {
@@ -27,8 +29,17 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
             return item ? item.id : '';
         }
     });
-    mountedScrollToLastMsgFlag = false;
+    ScrollToLastMsgFlag = false;
     hasMore = true;
+    DefaultListScrollParams: ScrollParams = {
+        clientHeight: 0,
+        clientWidth: 0,
+        scrollHeight: 0,
+        scrollLeft: 0,
+        scrollTop: 0,
+        scrollWidth: 0,
+    };
+    ListScrollParams: ScrollParams = this.DefaultListScrollParams;
 
     componentDidMount() {
         this.onSwitchChat();
@@ -36,71 +47,97 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
             this.ScrollToLastMessage();
         });
     }
-    onSwitchChat = () => {
-        if (this.props.list.length <= 10) {
-            this.loadMoreMessageListData().then(() => {
-                this.ComputeLastMessageHeight();
-                this.ScrollToLastMessage();
-            })
-        }
-    };
     componentDidUpdate(prevProps: Readonly<MessageAllPropsInterface>, prevState: Readonly<MessageAllStateInterface>, snapshot?: any) {
-        // todo: 当上一次的props长度为30条的时候，说明这次的更新会导致第一条消息消失，所以，要将第一条消息的高度缓存清除，然后更新最后一条消息的缓存
         const chatId = this.props.chat.id;
         if (chatId !== prevProps.chat.id) {
-            this.hasMore = true;
             this.onSwitchChat();
-            // this.mountedScrollToLastMsgFlag = false;
-            // this.ForceUpdate().then(() => {
-            //     this.ScrollToLastMessage();
-            // });
             return true;
         } else if (prevProps.list !== this.props.list) {
-            // if (!this.mountedScrollToLastMsgFlag) {
-            //     this.ComputeLastMessageHeight();
-            //     this.ScrollToLastMessage();
-            //     this.mountedScrollToLastMsgFlag = true;
-            // }
             return true;
         }
         return false;
     }
+    /**
+     * @name: onSwitchChat
+     * @Description: 会话切换时的回调，默认要滚动到底部
+     * @return: {void}
+     */
+    onSwitchChat = () => {
+        this.hasMore = true;
+        this.ListScrollParams = this.DefaultListScrollParams;
+        if (this.props.list.length <= 10) {
+            this.loadMoreMessageListData().then(() => {
+                this.ScrollToLastMessage();
+            });
+        } else {
+            this.ScrollToLastMessage();
+        }
+    };
     protected GetIndexRow = (index: number): MessageItemInterface => {
         return this.props.list[index];
     }
+    /**
+     * @name: RenderMsgItemRows
+     * @Description: 渲染消息项，会执行的比较频繁，尽量少做计算操作来确保性能
+     * @param: {ListRowProps} props - 参数
+     * @return: {React.ReactNode}
+     */
     protected RenderMsgItemRows = (props: ListRowProps): React.ReactNode => {
         const Message = this.props.list[props.index];
         const { CurrentUser, GetUserInfo } = this.props;
-        const SenderMsg = GetUserInfo(Message.sender);
+        const SenderUser = GetUserInfo(Message.sender);
         return (
             <CellMeasurer cache={this.DefaultCellMeasurerCache} columnIndex={0}
                           parent={props.parent} key={props.key} rowIndex={props.index}>
                 {
                     ({ measure, registerChild }) => (
-                        RenderMsgItemRows(
+                        this.RenderMsgItem(
                             Message,
                             props,
-                            CurrentUser,
-                            SenderMsg,
-                            measure,
-                            registerChild
+                            {
+                                CurrentUser,
+                                SenderUser,
+                                measure,
+                                registerChild
+                            }
                         )
                     )
                 }
             </CellMeasurer>
         );
-    }
-    protected ComputeLastMessageHeight = () => {
-        if (this.VirtualScroller) {
-            this.VirtualScroller.recomputeRowHeights(0);
-            this.VirtualScroller.recomputeRowHeights(this.props.list.length - 1);
-        }
     };
+    protected RenderMsgItem = (MessageItem: MessageItemInterface, props: ListRowProps, params : {
+        CurrentUser: CurrentUserInterface,
+        SenderUser: UserInterface,
+        measure: () => void,
+        registerChild: any,
+    }) => {
+        return RenderMsgItemRows(MessageItem, props, {
+            onLoad: () => {
+                params.measure();
+                this.VirtualScroller!.recomputeGridSize();
+            },
+            registerChild: params.registerChild,
+            CurrentUser: params.CurrentUser,
+            SenderUser: params.SenderUser
+        });
+    }
+    /**
+     * @name: ScrollToLastMessage
+     * @Description: 滚动至最底部
+     * @return: void
+     */
     protected ScrollToLastMessage = () => {
         if (this.props.list.length && this.VirtualScroller) {
             this.VirtualScroller.scrollToRow(this.props.list.length - 1);
+            this.ScrollToLastMsgFlag = true;
         }
     };
+    /**
+     * @name: ForceUpdate
+     * @Description: 强制清除所有item的高度缓存，重新计算容器大小
+     * @return: void
+     */
     protected ForceUpdate = () => {
         console.log('[TIPS] force update list');
         // 脱离执行流
@@ -112,17 +149,31 @@ class MessageAll extends React.Component<MessageAllPropsInterface, MessageAllSta
             resolve();
         });
     };
+    /**
+     * @name: onListScroll
+     * @Description: 列表滚动的时候触发，执行比较频繁
+     * @param: {ScrollParams} params - 滚动位置
+     * @return: {void}
+     */
     protected onListScroll = (params: ScrollParams) => {
+        console.log('on Scroll', params);
+        this.ScrollToLastMsgFlag = false;
+        this.ListScrollParams = params;
         if (params.scrollTop + params.clientHeight >= params.scrollHeight) {
             // 滑动到最底部
             console.log('[TIPS] 列表滚动至最底部', true);
+            this.ScrollToLastMsgFlag = true;
         }
     };
+    /**
+     * @name: onRowsRendered
+     * @Description: 当某一行渲染完毕之后执行的回调，会执行的比较频繁，用于重新计算当前滚动位置，使其不闪烁
+     * @param: {RenderedRows} params
+     * @return: void
+     */
     protected onRowsRendered = (params: RenderedRows) => {
-        if (params.startIndex <= 10) {
-            // 需要加载新的数据
-            console.log('[TIPS] Should load more data');
-            this.loadMoreMessageListData();
+        if (this.ScrollToLastMsgFlag) {
+            this.ScrollToLastMessage();
         }
     };
     protected loadMoreMessageListData = () => {

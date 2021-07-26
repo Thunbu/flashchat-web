@@ -1,0 +1,106 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body{
+            margin: 0;
+        }
+        html,body,.content{
+            height: 100%;
+            overflow: hidden;
+        }
+        #code_parent i{
+            color: rgb(128,191,80);
+        }
+        pre {outline: none; padding: 5px; margin: 5px;word-break: break-all;white-space: pre-wrap;}
+        span{ word-break: break-all; }
+        /*.string { color: green; }        !*字符串的样式*!*/
+        /*.number { color: darkorange; }    !*数字的样式*!*/
+        /*.boolean { color: blue; }        !*布尔型数据的样式*!*/
+        /*.null { color: magenta; }        !*null值的样式*!*/
+        /*.key { color: red; }            !*key值的样式*!*/
+        .content{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+        #code_parent{
+            max-width: 500px;
+            height: 100%;
+            overflow: auto;
+        }
+        div>section{
+            flex: 1;
+            flex-shrink: 0;
+        }
+        h2,h3,p{
+            margin: 0;
+            padding: 0;
+        }
+        #http_container>section>section{
+            margin: 10px;
+            padding: 10px;
+            border: 1px dashed;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        #http_container>section>section h2{
+            width: 100%;
+        }
+        #http_container>section>section section {
+            margin: 6px;
+            padding: 10px;
+            border: 1px dashed;
+        }
+        #IM_container>section {
+            display: flex;
+            flex-direction: row;
+        }
+        #IM_container>section>section {
+            margin: 10px;
+            padding: 10px;
+            border: 1px dashed;
+        }
+        .mt20{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <section style="padding: 10px;height: 100%; overflow: auto">
+        <h1>Thunbu-im-sdk Version 1.0.2</h1>
+        <textarea id="config_area" style="width: 100%; height: 100px;" placeholder="请输入配置JSON"></textarea>
+        <br />
+        <br />
+        <button id="apply_config">点击应用配置</button>
+        <br />
+        <hr />
+        <br />
+        <br />
+        <br />
+        <button id="login">登录</button>
+        <hr />
+        <section class="mt20">
+            <h2>IM 接口：</h2>
+            <div id="IM_container"></div>
+        </section>
+        <section class="mt20">
+            <h2>HTTP 接口：</h2>
+            <div id="http_container"></div>
+        </section>
+    </section>
+    <section id="code_parent" style="padding: 0 10px; background: #1D2221;">
+        <pre style="color: #cccccc;" id="new_message_container"><i>&para;IM日志区域</i></pre>
+        <button id="cleanLog" style="position: fixed; z-index: 11; right: 6px;top: 6px;">clean</button>
+    </section>
+</div>
+
+</body>
+</html>

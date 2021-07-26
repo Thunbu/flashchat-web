@@ -1,9 +1,9 @@
 import {ExternalInteraction, MessageLocalInteraction} from "./types/_message";
 import IMGetMessageListParams = ExternalInteraction.IMGetMessageListParams;
-import {IM_GetMessageList} from "./function/_message";
 import {IMGetMessageJoinToLocal} from "./transform/_message";
 import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 import {ADD_MESSAGE_LIST_TO_MAP, ADD_MESSAGE_LIST_TO_CHAT__LEFT_JOIN} from "../../Store/Types/message.t";
+import {IM_GetMessageList} from "./function/_message";
 
 /**
  * @author PengPeng

@@ -1,0 +1,283 @@
+{
+  "serverip": "wss://sdkdev-websocket.sammbo.com:8326",
+  "apiBaseUrl": "/DSSP-DEV",
+  "userSig": "J3BXH9nzIlxUblJeO7CkPBqp7ciQIbjuOESuqOHxbyV3X5LYk0SULV3HeUJYbwPdEGLrMsYCmQJeR7TfSSJAeW1sCqarvzRn/XsCZKF7r0k7NeXIySRHUf76h0WRYgKvEetEAUFIbetiZPTcqmwLBTG4+yIccCDUOrWbuQWcIeU=",
+  "userId": "A_8589934620",
+  "appId": "1000000217",
+  "appversion": "1.0.0",
+  "bundleId": "developer.sammbo.com",
+  "Http": [
+    {
+      "group": "Message",
+      "groupName": "消息",
+      "Functions": [
+        {
+          "name": "获取消息列表",
+          "FunctionName": "getMsgListAndCdMsgById",
+          "FunctionParams": {
+            "sessionType": 0,
+            "sessionId": "A_8589934619",
+            "securityType": 0,
+            "rows": 10,
+            "type": 1,
+            "msgId": "fe344002c34e96b2e7b560370dd748c4"
+          }
+        }
+      ]
+    },
+    {
+      "group": "Chat",
+      "groupName": "会话",
+      "Functions": [
+        {
+          "name": "设置会话",
+          "FunctionName": "setChatSession",
+          "FunctionParams": {
+            "sessionType": 1,
+            "sessionId": "2709251739914656773",
+            "securityType": 0,
+            "isTop": 1
+          }
+        },
+        {
+          "name": "获取会话详情信息",
+          "FunctionName": "getChatInfo",
+          "FunctionParams": {
+            "sessionType": 1,
+            "sessionId": "2709251739914656773",
+            "securityType": 0
+          }
+        },
+        {
+          "name": "获取所有会话",
+          "FunctionName": "getAllChat",
+          "FunctionParams": {
+            "sessionLevel": 0
+          }
+        },
+        {
+          "name": "获取会话详情信息",
+          "FunctionName": "getChatInfo",
+          "FunctionParams": {
+            "sessionType": 1,
+            "sessionId": "2709251739914656773",
+            "securityType": 0
+          }
+        }
+      ]
+    },
+    {
+      "group": "User",
+      "groupName": "人员",
+      "Functions": [
+        {
+          "name": "批量获取用户信息",
+          "FunctionName": "fetchMultiPersonalData",
+          "FunctionParams": {
+            "accounts": ["A_8589934620", "A_8589934619"]
+          }
+        }
+      ]
+    },
+    {
+      "group": "Group",
+      "groupName": "群组",
+      "Functions": [
+        {
+          "name": "获取所有群聊",
+          "FunctionName": "getAllUserGroup",
+          "FunctionParams": {"typeArr": [1,2,3,4] }
+        },
+        {
+          "name": "修改群聊信息",
+          "FunctionName": "modifyGroup",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773",
+            "groupName": "test"
+          }
+        },
+        {
+          "name": "修改群聊@all的设置",
+          "FunctionName": "setGroupAtAllToggle",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773",
+            "toggle": 0
+          }
+        },
+        {
+          "name": "获取群聊的简要信息",
+          "FunctionName": "getGroupIntro",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773"
+          }
+        },
+        {
+          "name": "获取群聊的简要信息",
+          "FunctionName": "getGroupIntro",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773"
+          }
+        },
+        {
+          "name": "获取群聊的详情",
+          "FunctionName": "getGroupDetail",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773"
+          }
+        },
+        {
+          "name": "获取群聊的详情-列表获取",
+          "FunctionName": "getGroupDetailList",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": ["2709251739914656773"]
+          }
+        },
+        {
+          "name": "搜索群组",
+          "FunctionName": "searchGroups",
+          "FunctionParams": {
+            "groupName": "测"
+          }
+        },
+        {
+          "name": "邀请加入群聊",
+          "FunctionName": "inviteJoinGroup",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773",
+            "members": ["A_8589934619"]
+          }
+        },
+        {
+          "name": "转让群主",
+          "FunctionName": "changeGroupOwner",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773",
+            "newOwnerId": "A_8589934619"
+          }
+        },
+        {
+          "name": "获取群组管理员",
+          "FunctionName": "getGroupManagers",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773"
+          }
+        },
+        {
+          "name": "获取群组成员Id集合",
+          "FunctionName": "getGroupMemberIds",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773"
+          }
+        },
+        {
+          "name": "获取群组成员集合",
+          "FunctionName": "getGroupMemberList",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773"
+          }
+        },
+        {
+          "name": "退出群组",
+          "FunctionName": "quitGroup",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773"
+          }
+        },
+        {
+          "name": "修改群成员角色",
+          "FunctionName": "setGroupMemberRole",
+          "FunctionParams": {
+            "groupType": 1,
+            "groupId": "2709251739914656773",
+            "managerIds": ["A_8589934619"]
+          }
+        },
+        {
+          "name": "ES搜索群聊",
+          "FunctionName": "searchEsGroupByName",
+          "FunctionParams": {
+            "text": "掏",
+            "index": 1,
+            "rows": 10
+          }
+        },
+        {
+          "name": "通过手机号搜索群聊",
+          "FunctionName": "searchGroupByMobile",
+          "FunctionParams": {
+            "mobile": "13221800506",
+            "index": 1,
+            "rows": 10
+          }
+        }
+      ]
+    }
+  ],
+  "IM": [
+    {
+      "name": "发送文本消息",
+      "FunctionParams": {
+        "message": {
+          "text": "文本消息 -测试"
+        },
+        "receiver": "A_8589934619",
+        "type": 0
+      }
+    },
+    {
+      "name": "发送图片消息",
+      "FunctionParams": {
+        "message": {
+          "format": 1,
+          "imageList": [
+            {
+              "type":0,
+              "url":"https://bossfs.sammbo.com/3/1/A_300149/9051e9e434b9f743e6ea66089b434ff6.png?x-oss-process=image/resize,m_mfit,h_720,w_720",
+              "size":4108583,
+              "width":3970,
+              "height":2132
+            },
+            {
+              "type":1,
+              "url":"https://bossfs.sammbo.com/3/1/A_300149/9051e9e434b9f743e6ea66089b434ff6.png?x-oss-process=image/resize,m_mfit,h_720,w_720",
+              "size":4108583,
+              "width":3970,
+              "height":2132
+            },
+            {
+              "type":2,
+              "url":"https://bossfs.sammbo.com/3/1/A_300149/9051e9e434b9f743e6ea66089b434ff6.png?x-oss-process=image/resize,m_mfit,h_720,w_720",
+              "size":4108583,
+              "width":3970,
+              "height":2132
+            }
+          ]
+        },
+        "receiver": "A_8589934619",
+        "type": 1
+      }
+    },
+    {
+      "name": "发送自定义消息",
+      "FunctionParams": {
+        "message": {
+          "data": "{\"type\":\"10025\",\"data\":{\"userId\":\"A_703534\",\"userName\":\"罗雪梅\",\"avatar\":\"https://account.geely.com/emp/1/NTc1NA==/NTA1MzU3NTY1Mg==/NTA1MzU3NTY1Mg==.jpeg\"}}"
+        },
+        "receiver": "A_8589934619",
+        "type": 10000
+      }
+    }
+  ]
+}

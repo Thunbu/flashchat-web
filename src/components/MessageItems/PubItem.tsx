@@ -6,19 +6,13 @@ import AudioItem from "./AudioItem";
 import VideoItem from "./VideoItem";
 import FileItem from "./FileItem";
 import UnKnownItem from "./UnKnownItem";
-import {UserInterface} from "../../modules/ChatRoot/Store/Types/users.t";
 import './PubItem.less';
-import {CurrentUserInterface} from "../../modules/ChatRoot/Store/Types/system.t";
 import {MessageLocalInteraction, PublicMessageInteraction} from "../../modules/ChatRoot/Methods/IM/types/_message";
 import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 import MessageTypeEnum = PublicMessageInteraction.MessageTypeEnum;
 import Avatar from "../Avatar";
+import {MessageItemProps, RenderMsgItemRowsParams} from "./Index.i";
 
-export interface MessageItemProps {
-    key: string,
-    style: React.CSSProperties
-    measure: () => void
-}
 
 export const GetMsgItemComponentByMsgType = (msgType: MessageTypeEnum) => {
     switch (msgType) {
@@ -42,33 +36,24 @@ export const RenderMsgItemComponent = (MessageItem: MessageItemInterface, props:
         Message: MessageItem,
         style: props.style,
         itemKey: props.key,
-        measure: props.measure
+        onLoad: props.onLoad
     });
 }
 
 /**
- * @author PengPeng
- * @date 10/27/20
- * @function
  * @name RenderMsgItemRows
  * @description 渲染 PUBITEM - 消息容器
  * @param {MessageItemInterface} MessageItem - 消息项
  * @param {ListRowProps} props - 虚拟滚动的props
- * @param {UserInterface} CurrentUser - 当前用户信息
- * @param {UserInterface} SenderUser - 发送者信息
- * @param {Function} measure - 重新计算的函数
- * @param {any} registerChild - 注册节点
+ * @param {RenderMsgItemRowsParams} params - 参数
  * @return {React.ReactNode}
  */
-
 export const RenderMsgItemRows = (
     MessageItem: MessageItemInterface,
     props: ListRowProps,
-    CurrentUser: CurrentUserInterface,
-    SenderUser: UserInterface,
-    measure: () => void,
-    registerChild: any
+    params: RenderMsgItemRowsParams
 ): React.ReactNode => {
+    const { CurrentUser, SenderUser, registerChild, onLoad } = params;
     const isMeFlag: boolean = CurrentUser.IMID === MessageItem.sender;
     return (
         <div ref={registerChild} className={`__pub_item ${isMeFlag ? '__isMe' : ''}`} style={props.style}>
@@ -80,7 +65,7 @@ export const RenderMsgItemRows = (
                     RenderMsgItemComponent(MessageItem, {
                         style: {},
                         key: props.key,
-                        measure
+                        onLoad
                     })
                 }
             </div>

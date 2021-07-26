@@ -4,12 +4,10 @@ import {
     ExternalInteraction,
     MessageLocalInteraction,
     MessageOnlineInteraction,
-    PublicMessageInteraction
 } from "../types/_message";
 import IMGetMessageInterface = MessageOnlineInteraction.IMGetMessageInterface;
 import MessageItemInterface = MessageLocalInteraction.MessageItemInterface;
 import IMSendMessageTypes = ExternalInteraction.IMSendMessageTypes;
-import MessageContentsInterface = PublicMessageInteraction.MessageContentsInterface;
 
 /**
  * @author PengPeng
