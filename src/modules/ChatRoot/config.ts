@@ -1,11 +1,11 @@
 
 // websocket target
-export const __DefaultWSLocation: string = 'wss://sdkdev-websocket.sammbo.com:8326'; // dev
-// export const __DefaultWSLocation: string = 'wss://sdktest-websocket.sammbo.com:18326'; // test
+// export const __DefaultWSLocation: string = 'wss://sdkdev-websocket.sammbo.com:8326'; // dev
+export const __DefaultWSLocation: string = 'wss://sdktest-websocket.sammbo.com:18326'; // test
 // export const __DefaultWSLocation: string = 'wss://sdk-websocket.sammbo.com:8326'; // prod
 
 // professional request proxy fieId
-export const __DefaultSDKHTTPLocation: string = '/DSSP-DEV';
+export const __DefaultSDKHTTPLocation: string = '/DSSP-TEST';
 
 // sim login use fieId
 export const __IMLoginAppId: string = '1000000217';

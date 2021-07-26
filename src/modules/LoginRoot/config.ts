@@ -5,7 +5,7 @@ export interface LoginUserInformation {
 }
 
 // 统一地址
-export const RequestBaseURL = '/DLSP-DEV';
+export const RequestBaseURL = '/DLSP-TEST';
 
 // 用户图鉴
 export const UserList: LoginUserInformation[] = [
