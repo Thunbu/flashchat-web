@@ -135,7 +135,7 @@
           "FunctionName": "getGroupDetailList",
           "FunctionParams": {
             "groupType": 1,
-            "groupId": ["2709251739914656773"]
+            "groupIds": ["2709251739914656773"]
           }
         },
         {
@@ -202,24 +202,6 @@
             "groupType": 1,
             "groupId": "2709251739914656773",
             "managerIds": ["A_8589934619"]
-          }
-        },
-        {
-          "name": "ES搜索群聊",
-          "FunctionName": "searchEsGroupByName",
-          "FunctionParams": {
-            "text": "掏",
-            "index": 1,
-            "rows": 10
-          }
-        },
-        {
-          "name": "通过手机号搜索群聊",
-          "FunctionName": "searchGroupByMobile",
-          "FunctionParams": {
-            "mobile": "13221800506",
-            "index": 1,
-            "rows": 10
           }
         }
       ]
