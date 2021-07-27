@@ -22,6 +22,72 @@
             "type": 1,
             "msgId": "fe344002c34e96b2e7b560370dd748c4"
           }
+        },
+        {
+          "name": "历史记录搜索",
+          "FunctionName": "searchMsg",
+          "FunctionParams": {
+            "sessionType": 0,
+            "sessionId": "A_8589934619",
+            "securityType": 0,
+            "rows": 10,
+            "type": 0,
+            "searchName": "h"
+          }
+        },
+        {
+          "name": "获取已读状态",
+          "FunctionName": "getMsgReadData",
+          "FunctionParams": {
+            "msgId": "6e7fb897cf1b46239294b71bb8bd935f"
+          }
+        },
+        {
+          "name": "获取回复数据",
+          "FunctionName": "getReplyList",
+          "FunctionParams": {
+            "msgId": "6e7fb897cf1b46239294b71bb8bd935f",
+            "sessionType": 1
+          }
+        },
+        {
+          "name": "获取消息详情",
+          "FunctionName": "getMessageDetails",
+          "FunctionParams": {
+            "msgIds": ["6e7fb897cf1b46239294b71bb8bd935f"],
+            "sessionType": 1
+          }
+        },
+        {
+          "name": "标记消息",
+          "FunctionName": "signMessage",
+          "FunctionParams": {
+            "sessionType": 0,
+            "sessionId": "A_8589934619",
+            "securityType": 0,
+            "msgId": "fe344002c34e96b2e7b560370dd748c4",
+            "cross": 0
+          }
+        },
+        {
+          "name": "取消标记消息",
+          "FunctionName": "unSignMessage",
+          "FunctionParams": {
+            "sessionType": 0,
+            "sessionId": "A_8589934619",
+            "securityType": 0,
+            "msgId": "fe344002c34e96b2e7b560370dd748c4",
+            "cross": 0
+          }
+        },
+        {
+          "name": "获取标记列表",
+          "FunctionName": "getSignList",
+          "FunctionParams": {
+            "sessionType": 0,
+            "sessionId": "A_8589934619",
+            "securityType": 0
+          }
         }
       ]
     },
@@ -63,6 +129,49 @@
             "sessionId": "2709251739914656773",
             "securityType": 0
           }
+        },
+        {
+          "name": "删除会话",
+          "FunctionName": "deleteChat",
+          "FunctionParams": {
+            "sessionType": 1,
+            "sessionId": "2768881994761296898",
+            "securityType": 0
+          }
+        },
+        {
+          "name": "删除会话（彻底删除）",
+          "FunctionName": "destroyChat",
+          "FunctionParams": {
+            "sessionType": 1,
+            "sessionId": "2768881994761296898",
+            "securityType": 0
+          }
+        },
+        {
+          "name": "设置稍后处理的会话",
+          "FunctionName": "setChatSessionLaterDeal",
+          "FunctionParams": {
+            "sessionType": 1,
+            "sessionId": "2773753692799163398",
+            "securityType": 0,
+            "isLaterDeal": 1
+          }
+        },
+        {
+          "name": "设置稍后处理的会话",
+          "FunctionName": "setChatSessionLaterDeal",
+          "FunctionParams": {
+            "sessionType": 1,
+            "sessionId": "2773753692799163398",
+            "securityType": 0,
+            "isLaterDeal": 1
+          }
+        },
+        {
+          "name": "获取稍后处理的会话列表",
+          "FunctionName": "getLaterDealChatSession",
+          "FunctionParams": {}
         }
       ]
     },
@@ -151,7 +260,7 @@
           "FunctionParams": {
             "groupType": 1,
             "groupId": "2709251739914656773",
-            "members": ["A_8589934619"]
+            "userIds": ["A_8589934619"]
           }
         },
         {
@@ -201,7 +310,8 @@
           "FunctionParams": {
             "groupType": 1,
             "groupId": "2709251739914656773",
-            "managerIds": ["A_8589934619"]
+            "managerIds": ["A_8589934619"],
+            "type": 1
           }
         }
       ]

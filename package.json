@@ -50,7 +50,7 @@
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "text-loader": "^0.0.1",
-    "thunbu-im-sdk": "^1.0.1",
+    "thunbu-im-sdk": "^1.0.4",
     "ts-loader": "^5.3.3",
     "typescript": "^3.2.2",
     "url-loader": "^1.1.2",

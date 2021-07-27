@@ -4,52 +4,25 @@ import Config from './config.json';
 let ResultConfig = Config;
 let SIMInstance;
 
-const bindEvent = () => {
-	SIMInstance.addEventListener('msg', function (msg) {
-		console.log('msg: ', msg); // 接收到新消息
-		recordLog(msg, 1, 'msg');
-	});
-	SIMInstance.addEventListener('notice', function (res) {
-		console.log('notice: ', res); // 接收到通知消息
-		recordLog(res, 1, 'notice');
-	});
-	SIMInstance.addEventListener('msgChange', function(res) {
-		console.log('msgChange: ', res); // 消息变化通知
-		recordLog(res, 1, 'msgChange');
-	});
-	SIMInstance.addEventListener('connectChange', function(status) {
-		console.log('connectChange: ', status); // 链接状态变更
-		recordLog(status, 1, 'connectChange');
-	});
-
-	const LoginBtn = document.getElementById('login');
-	LoginBtn.addEventListener('click', () => {
-		const loginParams = {
-			appId: ResultConfig.appId,
-			userId: ResultConfig.userId,
-			userSig: ResultConfig.userSig,
-			appversion: ResultConfig.appversion,
-			bundleId: ResultConfig.bundleId,
-		};
-		SIMInstance.login(loginParams).then((res) => {
-			console.log('登录成功！');
-			recordLog(res, 1, '登录SIM成功');
-		}).catch((err) => {
-			console.log('登录失败！');
-			recordLog(err, 1, '登录SIM失败');
-		});
-		recordLog(loginParams, 0, '开始登录SIM');
-	});
+if (localStorage.getItem('config')) {
+	ResultConfig = JSON.parse(localStorage.getItem('config'));
+} else {
+	localStorage.setItem('config', JSON.stringify(Config));
 }
 
 window.onload = () => {
-	document.getElementById('config_area').value = JSON.stringify(Config, null, '\t');
+	document.getElementById('config_area').value = JSON.stringify(ResultConfig, null, '\t');
 	document.getElementById('cleanLog').addEventListener('click', () => {
 		const codeContainer = document.getElementById('new_message_container');
 		codeContainer.innerHTML = '<i>&para;IM日志区域</i>'
 	});
 	document.getElementById('apply_config').addEventListener('click', () => {
-		ResultConfig = JSON.parse(document.getElementById('config_area').value);
+		const value = document.getElementById('config_area').value;
+		ResultConfig = JSON.parse(value);
+		localStorage.setItem('config', value);
+		if (SIMInstance) {
+			window.location.reload();
+		}
 		const instanceProps = {
 			serverip: ResultConfig.serverip,
 			apiBaseUrl: ResultConfig.apiBaseUrl,
@@ -86,6 +59,44 @@ window.onload = () => {
 			sendMsg(JSONParams.message, JSONParams.receiver, JSONParams.type);
 		}
 	})
+}
+
+const bindEvent = () => {
+	SIMInstance.addEventListener('msg', function (msg) {
+		console.log('msg: ', msg); // 接收到新消息
+		recordLog(msg, 1, 'msg');
+	});
+	SIMInstance.addEventListener('notice', function (res) {
+		console.log('notice: ', res); // 接收到通知消息
+		recordLog(res, 1, 'notice');
+	});
+	SIMInstance.addEventListener('msgChange', function(res) {
+		console.log('msgChange: ', res); // 消息变化通知
+		recordLog(res, 1, 'msgChange');
+	});
+	SIMInstance.addEventListener('connectChange', function(status) {
+		console.log('connectChange: ', status); // 链接状态变更
+		recordLog(status, 1, 'connectChange');
+	});
+
+	const LoginBtn = document.getElementById('login');
+	LoginBtn.addEventListener('click', () => {
+		const loginParams = {
+			appId: ResultConfig.appId,
+			userId: ResultConfig.userId,
+			userSig: ResultConfig.userSig,
+			appversion: ResultConfig.appversion,
+			bundleId: ResultConfig.bundleId,
+		};
+		SIMInstance.login(loginParams).then((res) => {
+			console.log('登录成功！');
+			recordLog(res, 1, '登录SIM成功');
+		}).catch((err) => {
+			console.log('登录失败！');
+			recordLog(err, 1, '登录SIM失败');
+		});
+		recordLog(loginParams, 0, '开始登录SIM');
+	});
 }
 
 function renderIMDom() {
